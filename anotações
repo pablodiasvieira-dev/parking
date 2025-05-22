@@ -1,0 +1,12 @@
+Criar um projeto pelo vite.
+
+npm create vite@latest project_name
+
+cd project_name
+npm install
+
+https://tailwindcss.com/docs/installation/using-vite
+npm install tailwindcss @tailwindcss/vite
+
+
+npm install lucide-react
