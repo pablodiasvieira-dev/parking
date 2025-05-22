@@ -1,54 +1,45 @@
-# React + TypeScript + Vite
+# 🚗 Parking - Sistema de Gestão de Vagas de Estacionamento
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web desenvolvida com foco em facilitar a **gestão de vagas de estacionamento** de forma simples, visual e responsiva. Ideal para uso em dispositivos móveis.
 
-Currently, two official plugins are available:
+## 📱 Visão Geral
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O **Parking** permite que usuários acompanhem em tempo real o status das vagas disponíveis em um estacionamento, podendo:
 
-## Expanding the ESLint configuration
+- ✅ Ver vagas **disponíveis**
+- ❌ Ver vagas **ocupadas**
+- 🚫 Ver vagas **bloqueadas**
+- 📅 **Reservar** uma vaga disponível por um período definido
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+A interface é **otimizada para visualização em celulares**, sendo possível acessar e operar com praticidade em ambientes externos ou internos.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🧰 Tecnologias Utilizadas
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- ⚛️ [ReactJS](https://reactjs.org/)
+- 🎨 [TailwindCSS](https://tailwindcss.com/)
+- ⌨️ [TypeScript](https://www.typescriptlang.org/)
+- ⚡ [Vite](https://vitejs.dev/)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## 🖼️ Imagens da Aplicação
+
+> Em breve...
+
+<!-- Substitua os exemplos abaixo pelos links das suas imagens quando estiverem disponíveis -->
+
+<!-- ![Tela Inicial](./assets/tela-inicial.png) -->
+<!-- ![Vagas Disponíveis](./assets/vagas-disponiveis.png) -->
+<!-- ![Tela de Reserva](./assets/reserva-vaga.png) -->
+
+---
+
+## 🚀 Como Executar o Projeto
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/pablodiasvieira-dev/parking.git
+cd parking

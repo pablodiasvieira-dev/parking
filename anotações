@@ -10,3 +10,7 @@ npm install tailwindcss @tailwindcss/vite
 
 
 npm install lucide-react
+
+git remote add origin git@github.com:pablodiasvieira-dev/parking.git
+git branch -M main
+git push -u origin main
