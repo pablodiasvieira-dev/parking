@@ -1,6 +1,6 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react'
+import  { useEffect, useRef } from 'react'
 import { BotaoBase } from '../Botoes/button';
 import { filtroSetBloco } from '../../redux/garagemSlice';
 import { useDispatch } from 'react-redux';

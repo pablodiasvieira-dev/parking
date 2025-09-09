@@ -1,3 +1,6 @@
+import carImage from "../../assets/carDarkCut1.png"
+import carImage2 from "../../assets/carDarkCut2.png"
+
 interface IHeader {
     title: string;
     subtitle: string;
@@ -5,7 +8,7 @@ interface IHeader {
 
 
 export function Header(
-    { title, subtitle}: IHeader
+    { title, subtitle }: IHeader
 ) {
     return (
         <header>
@@ -16,5 +19,54 @@ export function Header(
                 <p className='w-fit h-full text-amber-50 font-light '>{subtitle}</p>
             </div>
         </header>
+    )
+}
+
+export function HeaderApp() {
+    return (
+        <div className='flex flex-col justify-between w-full h-full' >
+            <div className="w-full h-3/5 flex flex-col gap-0 justify-center">
+                <h2 className='font-light w-full text-4xl text-black text-start'>
+                    Bem-vindo ao
+                </h2>
+                <h1 className='font-bold w-full text-5xl text-black text-start'>
+                    Parking App
+                </h1>
+            </div>
+            <LogoAppWelcome />
+        </div>
+    )
+}
+
+export function HeaderEntrada() {
+    return (
+        <div className='flex justify-between w-full h-full pl-8' >
+            <div className="w-2/3 h-full flex flex-col gap-0 justify-center align-middle">
+                <h1 className='font-bold w-full h-fit text-3xl text-black text-start'>
+                    Parking
+                </h1>
+            </div>
+            <LogoEntrada />
+        </div>
+    )
+}
+
+export function LogoAppWelcome() {
+    return (
+        <div className="w-full h-2/5 flex justify-center ">
+            <div className="border-x-8 border-t-8 rounded-t-sm border-gray-900  w-60 h-full flex justify-center items-end">
+                <img src={carImage} alt="Carro Logo do APP" />
+            </div>
+        </div>
+    )
+}
+
+export function LogoEntrada() {
+    return (
+        <div className="w-1/3 h-full pt-8 flex justify-center ">
+            <div className="border-l-4 border-t-4 rounded-tl-sm border-gray-900  w-60 h-full flex justify-end items-end">
+                <img className="h-32" src={carImage2} alt="Carro Logo do APP" />
+            </div>
+        </div>
     )
 }

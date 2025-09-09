@@ -1,14 +1,14 @@
+import { Input } from "../ui/input"
+
 interface IInput {
-    label: string
     type: string
     placeholder: string
 }
 
-export function Input({label, type, placeholder}: IInput) {
+export function InputApp({ type, placeholder}: IInput) {
   return (
-    <div>
-        <label htmlFor="login">{label}</label>
-        <input id="login" type={type} placeholder={placeholder} />
+    <div className="w-full h-10">
+        <Input className="h-full" type={type} placeholder={placeholder} />
     </div>
   )
 }
