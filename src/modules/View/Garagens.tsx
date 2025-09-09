@@ -1,13 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import FiltroVagas from '../../components/Filtro/FiltroVagas'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { ElementSituation, GarageBase } from '../../components/Garagem/garages'
 import { ModalDownUp } from '../../components/Modal/modal'
+import { setSubTitleNavigation, setTitleNavigation } from '../../redux/navigationSlice'
 
 function Garagens() {
-      const garagensDataLista = useSelector((state: RootState) => state.garagens)
-      const [openModal, setOpenModal] = useState(true)
+    const dispatch = useDispatch()
+    const garagensDataLista = useSelector((state: RootState) => state.garagens)
+    const [openModal, setOpenModal] = useState(true)
+
+    useEffect (() => {
+        dispatch(setTitleNavigation("Estacionamento"))
+        dispatch(setSubTitleNavigation("Prédio Público"))
+        }, [dispatch]
+    ) 
     return (
         <>
             <FiltroVagas blocoSelecionado={garagensDataLista.filtros.blocoSelecionado} />

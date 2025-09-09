@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import  garagemSlice  from './garagemSlice'
+import  navigationSlice from './navigationSlice'
 
 export const store = configureStore( {
     reducer: {
-        garagens: garagemSlice
+        garagens: garagemSlice,
+        navegar: navigationSlice,
     }
     // {
     //     usuarios: [],

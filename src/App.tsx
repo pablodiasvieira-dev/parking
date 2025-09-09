@@ -1,23 +1,20 @@
 import './App.css'
-import { MenuNavegacao } from './components/nav-inferior';
-import { Header } from './components/Header/Header';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Layout } from './components/Layout/Layout';
 import Garagens from './modules/View/Garagens';
-
-
+import { Login } from './modules/Login/Login';
 
 function App() {
-
-
-
   return (
     <>
-      <Header />
-      <main className='main  flex flex-col w-full h-full bg-gray-900 overflow-y-auto '>
-        <Garagens />
-      </main>
-      <footer>
-        <MenuNavegacao />
-      </footer>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index path='garagens' element={<Garagens />} />
+            <Route path='login' element={<Login />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
