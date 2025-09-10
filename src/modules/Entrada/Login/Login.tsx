@@ -24,14 +24,18 @@ export function Login() {
   return (
     <div className="w-full h-full flex flex-col justify-start items-center gap-4">
       <div className="w-full h-18 flex justify-evenly gap-3">
-        <button className="text-white font-medium cursor-pointer w-full h-full content-center" onClick={() => handleClickMenu(1)}>Login</button>
-        <div className="text-white content-center">|</div>
-        <button className="text-gray-200 font-light cursor-pointer w-full h-full content-center" onClick={() => handleClickMenu(2)}>Registrar</button>
+        <button className={`dark:text-white ${menuEntradaSelect === 1 ? 'font-medium' : 'font-light'} cursor-pointer w-full h-full content-center`} 
+          onClick={() => handleClickMenu(1)}>Login</button>
+        <div className="text-primary dark:text-white content-center">|</div>
+        <button className={`dark:text-gray-200 ${menuEntradaSelect === 2 ? 'font-medium' : 'font-light'} cursor-pointer w-full h-full content-center`} 
+          onClick={() => handleClickMenu(2)}>Registrar</button>
       </div>
       <div className="w-full h-full flex flex-col gap-5">
         {menuEntradaSelect === 1 ? <FormLogin /> : <FormRegistrar />}
-        <Button className="bg-amber-500 text-black text-xl h-10 cursor-pointer"  >Entrar</Button>
-        <a className="text-white text-[.7rem] cursor-pointer w-full h-fit content-center" href="">Esqueci minha senha</a>
+        <Button variant="default" className=" text-black text-xl h-10 cursor-pointer"  >
+          {menuEntradaSelect === 1 ? ("Entrar") : ("Registrar")}
+        </Button>
+        <a className="dark:text-white text-[.7rem] cursor-pointer w-full h-fit content-center" href="">Esqueci minha senha</a>
       </div>
     </div>
   )
@@ -51,7 +55,7 @@ export function FormRegistrar() {
       <InputApp type="fullname" placeholder="Nome Completo" />
       <InputApp type="email" placeholder="E-mail" />
       <InputApp type="password" placeholder="Senha" />
-      <InputApp type="password-repeat" placeholder="Repita a Senha" />
+      <InputApp type="password" placeholder="Repita a Senha" />
     </div>
   )
 }

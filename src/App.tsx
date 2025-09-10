@@ -4,10 +4,12 @@ import { Layout, LayoutApp, LayoutEntrada } from './components/Layout/Layout';
 import Garagens from './modules/View/Garagens';
 import { Login } from './modules/Entrada/Login/Login';
 import { BemVindo } from './modules/Entrada/BemVindo';
+import { ThemeProvider } from './components/theme-provider';
 
 function App() {
   return (
     <>
+    <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LayoutApp />}>
@@ -21,6 +23,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+    </ThemeProvider>
     </>
   )
 }

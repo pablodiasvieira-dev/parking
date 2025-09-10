@@ -13,7 +13,7 @@ export function Header(
     return (
         <header>
             <div className='cabecalho-geral flex flex-col items-start sticky top-0 right-0 w-full h-20 bg-gray-900  z-50 px-8 py-2 shadow-[0px_10px_10px_-1px_rgba(0,_0,_0,_0.25)]' >
-                <span className='font-bold w-fit h-full text-3xl text-amber-400 content-center'>
+                <span className='font-bold w-fit h-full text-3xl text-primary content-center'>
                     {title}
                 </span>
                 <p className='w-fit h-full text-amber-50 font-light '>{subtitle}</p>
@@ -46,7 +46,9 @@ export function HeaderEntrada() {
                     Parking
                 </h1>
             </div>
-            <LogoEntrada />
+            <div className="w-1/3 h-full flex  flex-col justify-start items-end ">
+                <LogoEntrada />
+            </div>
         </div>
     )
 }
@@ -63,7 +65,7 @@ export function LogoAppWelcome() {
 
 export function LogoEntrada() {
     return (
-        <div className="w-1/3 h-full pt-8 flex justify-center ">
+        <div className="w-full h-full pt-8 flex justify-center ">
             <div className="border-l-4 border-t-4 rounded-tl-sm border-gray-900  w-60 h-full flex justify-end items-end">
                 <img className="h-32" src={carImage2} alt="Carro Logo do APP" />
             </div>
