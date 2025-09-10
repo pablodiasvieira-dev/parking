@@ -1,9 +1,6 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Layout, LayoutApp, LayoutEntrada } from './components/Layout/Layout';
-import Garagens from './modules/View/Garagens';
-import { Login } from './modules/Entrada/Login/Login';
-import { BemVindo } from './modules/Entrada/BemVindo';
+import { BaseLayout,  LayoutApp,  LayoutBemVindo, LayoutEntrada } from './components/Layout/Layout';
 import { ThemeProvider } from './components/theme-provider';
 
 function App() {
@@ -12,14 +9,11 @@ function App() {
     <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<LayoutApp />}>
-            <Route index element={<BemVindo />} />
-          </Route>
-          <Route path='entrar' element={<LayoutEntrada />}>
-            <Route index element={<Login />} />
-          </Route>
-          <Route path='app' element={<Layout />}>
-            <Route index element={<Garagens />} />
+
+          <Route path='/' element={<BaseLayout />}>
+            <Route index element={<LayoutBemVindo />} />
+            <Route path='entrar' element={<LayoutEntrada />} />
+            <Route path='app' element={<LayoutApp />} />
           </Route>
         </Routes>
       </BrowserRouter>
