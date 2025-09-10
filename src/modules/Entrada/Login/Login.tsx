@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import { setSubTitleNavigation, setTitleNavigation } from "../../../redux/navigationSlice"
 import { InputApp } from "../../../components/Form/Input"
 import { Button } from "@/components/ui/button"
-import { Link } from "react-router"
+import { Link } from "react-router-dom"
 
 export function Login() {
 
@@ -32,12 +32,21 @@ export function Login() {
           onClick={() => handleClickMenu(2)}>Registrar</button>
       </div>
       <div className="w-full h-full flex flex-col gap-5">
-        {menuEntradaSelect === 1 ? <FormLogin /> : <FormRegistrar />}
-        <Link to={menuEntradaSelect === 1 ? "/app" : "/entrar" } >
-          <Button variant="default" className=" text-black text-xl h-10 cursor-pointer"  >
-            {menuEntradaSelect === 1 ? ("Entrar") : ("Registrar")}
-          </Button>
-        </Link>
+        {menuEntradaSelect === 1 ? 
+          <>
+            <FormLogin /> 
+            <Link to={menuEntradaSelect === 1 ? "/app" : "/entrar" } >
+              <Button variant="default" className=" text-black text-xl h-10 cursor-pointer"> Entrar </Button>
+            </Link>
+          </> :
+          <>
+            <FormRegistrar />
+            <Button variant="default" className=" text-black text-xl h-10 cursor-pointer"
+              onClick={() => handleClickMenu(1)} >
+              Registrar
+            </Button>
+          </>
+          }
         <a className="dark:text-white text-[.7rem] cursor-pointer w-full h-fit content-center" href="">Esqueci minha senha</a>
       </div>
     </div>
