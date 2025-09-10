@@ -65,9 +65,9 @@ export function LogoAppWelcome() {
 
 export function LogoEntrada() {
     return (
-        <div className="w-full h-full pt-8 flex justify-center ">
-            <div className="border-l-4 border-t-4 rounded-tl-sm border-gray-900  w-60 h-full flex justify-end items-end">
-                <img className="h-32" src={carImage2} alt="Carro Logo do APP" />
+        <div className="w-full h-full pt-8 flex justify-end ">
+            <div className="border-l-4 border-t-4 rounded-tl-[4px] border-gray-900 pt-3 w-24 h-full flex justify-end items-end">
+                <img className="h-full w-full" src={carImage2} alt="Carro Logo do APP" />
             </div>
         </div>
     )
