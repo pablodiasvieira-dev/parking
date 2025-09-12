@@ -1,12 +1,13 @@
 import { Header, HeaderApp, HeaderEntrada } from '../Header/Header'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { MenuNavegacao } from '../nav-inferior'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../redux/store'
 import { ModeToggle } from '../mode-toggle'
 import { BemVindo } from '@/modules/Entrada/BemVindo'
 import { Login } from '@/modules/Entrada/Login/Login'
-import Garagens from '@/modules/View/Garagens'
+import Garagens from '@/modules/App/Garagens'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/redux/store'
+import { useEffect } from 'react'
 
 export function BaseLayout() {
     return (
@@ -29,7 +30,15 @@ export function LayoutBemVindo() {
     )
 }
 
+
 export function LayoutEntrada() {
+    const user = useSelector((state: RootState) => state.auth.user);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) navigate("/app");
+    }, [user, navigate])
+    
     return (
         <div className='flex flex-col w-full h-full'>
             <header className='h-44 w-full bg-primary overflow-hidden'>
@@ -49,7 +58,11 @@ export function LayoutEntrada() {
     )
 }
 
-export function LayoutApp() {
+interface ILayoutApp {
+    user: any
+}
+
+export function LayoutApp({ user }: ILayoutApp) {
     const navigationTitles = useSelector((state: RootState) => state.navegar)
     return (
         <>
@@ -57,7 +70,7 @@ export function LayoutApp() {
                 <Header title={navigationTitles.title} subtitle={navigationTitles.subtitle} />
             </header>
             <main className='main  flex flex-col w-full h-full bg-gray-900 overflow-y-auto '>
-                <Garagens />
+                <Garagens user={user} />
             </main>
             <footer>
                 <MenuNavegacao />

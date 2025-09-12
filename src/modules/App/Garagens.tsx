@@ -6,7 +6,11 @@ import { ElementSituation, GarageBase } from '../../components/Garagem/garages'
 import { ModalDownUp } from '../../components/Modal/modal'
 import { setSubTitleNavigation, setTitleNavigation } from '../../redux/navigationSlice'
 
-function Garagens() {
+interface IGaragens {
+    user: any
+}
+
+function Garagens({user}: IGaragens) {
     const dispatch = useDispatch()
     const garagensDataLista = useSelector((state: RootState) => state.garagens)
     const [openModal, setOpenModal] = useState(true)
@@ -18,6 +22,7 @@ function Garagens() {
     ) 
     return (
         <>
+        <p>Olá{user.displayName}</p>
             <FiltroVagas blocoSelecionado={garagensDataLista.filtros.blocoSelecionado} />
             <div className='conteudo w-full h-full px-8 flex flex-col overflow-y-auto'>
                 <div className='area-vagas w-full flex flex-row justify-between' >

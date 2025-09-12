@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { setSubTitleNavigation, setTitleNavigation } from "../../../redux/navigationSlice"
 import { InputApp } from "../../../components/Form/Input"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
+import { loginWithGoogleThunk } from "@/redux/authSlice"
+import { AppDispatch } from "@/redux/store"
+
 
 export function Login() {
 
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
 
   const [menuEntradaSelect, setMenuEntradaSelect] = useState<Number>(1)
 
@@ -15,27 +17,28 @@ export function Login() {
     setMenuEntradaSelect(menuSelect)
   }
 
-  useEffect(() => {
-    dispatch(setTitleNavigation("Login"))
-    dispatch(setSubTitleNavigation("Faça login para acessar o sistema"))
-  }, []
-  )
-
+  const handleLogin = () => {
+      try {
+          dispatch(loginWithGoogleThunk())
+      } catch (error) {
+          console.error(error)
+      }
+  }
 
   return (
     <div className="w-full h-full flex flex-col justify-start items-center gap-4">
       <div className="w-full h-18 flex justify-evenly gap-3">
-        <button className={`dark:text-white ${menuEntradaSelect === 1 ? 'font-medium' : 'font-light'} cursor-pointer w-full h-full content-center`} 
+        <button className={`dark:text-white ${menuEntradaSelect === 1 ? 'font-medium' : 'font-light'} cursor-pointer w-full h-full content-center`}
           onClick={() => handleClickMenu(1)}>Login</button>
         <div className="text-primary dark:text-white content-center">|</div>
-        <button className={`dark:text-gray-200 ${menuEntradaSelect === 2 ? 'font-medium' : 'font-light'} cursor-pointer w-full h-full content-center`} 
+        <button className={`dark:text-gray-200 ${menuEntradaSelect === 2 ? 'font-medium' : 'font-light'} cursor-pointer w-full h-full content-center`}
           onClick={() => handleClickMenu(2)}>Registrar</button>
       </div>
-      <div className="w-full h-full flex flex-col gap-5">
-        {menuEntradaSelect === 1 ? 
+      <div className="w-full h-full flex flex-col gap-5 items-center">
+        {menuEntradaSelect === 1 ?
           <>
-            <FormLogin /> 
-            <Link to={menuEntradaSelect === 1 ? "/app" : "/entrar" } >
+            <FormLogin />
+            <Link to={menuEntradaSelect === 1 ? "/app" : "/entrar"} >
               <Button variant="default" className=" text-black text-xl h-10 cursor-pointer"> Entrar </Button>
             </Link>
           </> :
@@ -46,8 +49,12 @@ export function Login() {
               Registrar
             </Button>
           </>
-          }
+        }
         <a className="dark:text-white text-[.7rem] cursor-pointer w-full h-fit content-center" href="">Esqueci minha senha</a>
+        <Button variant="outline" className=" text-black text-md h-10 cursor-pointer dark:text-primary font-light w-fit"
+          onClick={handleLogin} >
+          Google
+        </Button>
       </div>
     </div>
   )

@@ -1,15 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import dotenv from "dotenv"
 
-dotenv.config()
-const API_KEY = process.env.API_KEY_FIRE
-const AUTH_DOMAIN = process.env.AUTH_DOMAIN
-const PROJECT_ID = process.env.PROJECT_ID
-const STORAGED_BUCKET = process.env.STORAGED_BUCKET
-const MESSAGINF_SENDER_ID = process.env.MESSAGINF_SENDER_ID
-const APP_ID = process.env.APP_ID
-const MEASUREMENT_DI = process.env.MEASUREMENT_DI
+const API_KEY = import.meta.env.VITE_API_KEY_FIRE
+const AUTH_DOMAIN = import.meta.env.VITE_AUTH_DOMAIN
+const PROJECT_ID = import.meta.env.VITE_PROJECT_ID
+const STORAGED_BUCKET = import.meta.env.VITE_STORAGED_BUCKET
+const MESSAGINF_SENDER_ID = import.meta.env.VITE_MESSAGING_SENDER_ID
+const APP_ID = import.meta.env.VITE_APP_ID
+const MEASUREMENT_DI = import.meta.env.VITE_MEASUREMENT_ID
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,3 +25,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+
+
+
