@@ -11,6 +11,7 @@ interface IGaragens {
 }
 
 function Garagens({user}: IGaragens) {
+    if(!user) return (<div>Você precisa estar autenticado para acessar esta página.</div>)
     const dispatch = useDispatch()
     const garagensDataLista = useSelector((state: RootState) => state.garagens)
     const [openModal, setOpenModal] = useState(true)
@@ -22,14 +23,13 @@ function Garagens({user}: IGaragens) {
     ) 
     return (
         <>
-        <p>Olá{user.displayName}</p>
             <FiltroVagas blocoSelecionado={garagensDataLista.filtros.blocoSelecionado} />
             <div className='conteudo w-full h-full px-8 flex flex-col overflow-y-auto'>
                 <div className='area-vagas w-full flex flex-row justify-between' >
-                    <div className='esquerda border-y-2 border-l-2'>
+                    <div className='esquerda border-y-2 border-l-2 border-primary'>
                         {garagensDataLista.apiGaragens.map(
                             (item, index) => garagensDataLista.filtros.blocoSelecionado === item.bloco && !item.right && (
-                                <GarageBase key={index.toString()} isRight={item.right} numberVacancy={item.number}
+                                <GarageBase key={index.toString()} isRight={item.right} numberVacancy={item.number} statusVacancy={item.status}
                                     clicaNaVaga={() => setOpenModal(!openModal)}
                                     children={
                                         <ElementSituation isRight={item.right} statusVacancy={item.status} />
@@ -37,10 +37,10 @@ function Garagens({user}: IGaragens) {
                                 />)
                         )}
                     </div>
-                    <div className='direita border-y-2 border-r-2'>
+                    <div className='direita border-y-2 border-r-2 border-primary'>
                         {garagensDataLista.apiGaragens.map(
                             (item, index) => garagensDataLista.filtros.blocoSelecionado === item.bloco && item.right && (
-                                <GarageBase key={index.toString()} isRight={item.right} numberVacancy={item.number}
+                                <GarageBase key={index.toString()} isRight={item.right} numberVacancy={item.number} statusVacancy={item.status}
                                     children={
                                         <ElementSituation isRight={item.right} statusVacancy={item.status} />
                                     }

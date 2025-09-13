@@ -2,7 +2,7 @@ export interface Vacancy {
     id: string;
     number: string;
     right: boolean;
-    status?: string;
+    status: "lock" | "unlock" | "use" | "reserved"
     bloco?: string;
     ordemNoBloco?: string
 }

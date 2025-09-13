@@ -1,11 +1,11 @@
-import { LockKeyholeIcon } from 'lucide-react';
+import { Clock10Icon, LockKeyholeIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 
 interface garageProps {
     isRight: boolean;
     children?: ReactNode;
     numberVacancy?: string;
-    statusVacancy?: string;
+    statusVacancy: string;
     key?: string
     clicaNaVaga?: () => void;
 }
@@ -13,12 +13,12 @@ interface garageProps {
 export function GarageBase(props: garageProps) {
     return (
         <>
-            <div className={`garagem-base border-b-2 w-32 h-18 hover:p-1 relative cursor-pointer`}>
+            <div className={`garagem-base border-b-2 border-primary w-32 h-18 hover:p-1 relative ${props.statusVacancy === "unlock" ? 'cursor-pointer' : 'cursor-not-allowed'} `}>
                 <div className='w-full h-full hover:border-2 rounded-md hover:bg-amber-600 '>
                     <div className='central w-full h-full flex justify-center items-center '>
                         {props.children}
                     </div>
-                    <div onClick={props.clicaNaVaga} className={`absolute text-sm bottom-0 ${props.isRight ? 'left-0' : 'right-0'}`}>
+                    <div onClick={props.clicaNaVaga} className={`absolute text-sm bottom-0 text-black dark:text-primary-foreground  ${props.isRight ? 'left-0' : 'right-0'}`}>
                         {props.numberVacancy}
                     </div>
                 </div>
@@ -36,9 +36,9 @@ export function ElementSituation(props: ElementSituationProps) {
     return (
         <>
             <div className='item-central mx-7 h-full flex justify-center items-center'>
-                {props.statusVacancy === "lock" && (<LockKeyholeIcon />)}
+                {props.statusVacancy === "lock" && (<LockKeyholeIcon className='text-black dark:text-primary-foreground' />)}
                 {props.statusVacancy === "use" && (<IconCar isRight = {props.isRight} />)}
-                {props.statusVacancy === "reserved" && (<LockKeyholeIcon />)}
+                {props.statusVacancy === "reserved" && (<Clock10Icon className='text-black dark:text-primary-foreground'/>)}
 
             </div>
         </>
@@ -52,7 +52,7 @@ interface IconCarProps{
 export function IconCar(props: IconCarProps) {
     return (
         <div>
-            <svg fill="#fff" height="100%" width="100%" version="1.1" id="Capa_1"
+            <svg height="100%" width="100%" version="1.1" id="Capa_1" className='fill-primary dark:fill-primary-foreground min-h-[72px] min-w-[72px]'
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 47.032 47.032"
                 transform={`${props.isRight ? 'matrix(-1, 0, 0, 1, 0, 0)rotate(90)' : 'matrix(-1, 0, 0, 1, 0, 0)rotate(-90)'}`}>
