@@ -3,14 +3,21 @@ import {
     getAuth, 
     createUserWithEmailAndPassword, signInWithEmailAndPassword,
     signInWithPopup, GoogleAuthProvider, signOut,
-    Auth
+    Auth,
+    updateProfile
 } from "firebase/auth"
 
 const auth = getAuth(app)
 
-export const createUserWithEmail = async (email: string, password: string) => {
+export const createUserWithEmail = async (nome: string, email: string, password: string) => {
     try {
         const user = await createUserWithEmailAndPassword(auth, email, password)
+            .then((result) => {
+                updateProfile( result.user,
+                    {displayName: nome}
+                )
+            })
+        // senha minhaSENHA123
         return user
     } catch (error) {
         console.error(error)

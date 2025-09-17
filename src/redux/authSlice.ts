@@ -1,8 +1,18 @@
-import { entrarComGoogle } from "@/db/auth";
+import { createUserWithEmail, entrarComEmail, entrarComGoogle } from "@/db/auth";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getAuth, onAuthStateChanged, signOut, User } from "firebase/auth";
 import { AppDispatch } from "./store";
 
+export const createUserWithEmailThunk = createAsyncThunk(
+    'auth/createUserWithEmail', async ({nome, email, password}: {nome:string, email: string, password: string} ) => {
+        return await createUserWithEmail(nome, email, password)
+    }
+)
+export const loginWithEmailThunk = createAsyncThunk(
+    'auth/loginWithEmail', async ({email, password}: {email: string, password: string}) => {
+        return await entrarComEmail(email, password)
+    }
+)
 export const loginWithGoogleThunk = createAsyncThunk(
     'auth/loginWithGoogle', async () => {
         return await entrarComGoogle()
@@ -48,7 +58,7 @@ export const authSlice = createSlice({
                 state.user = null
             }
                 state.isLoading = false
-            },
+        },
 
     },
     extraReducers: (builder) => {
