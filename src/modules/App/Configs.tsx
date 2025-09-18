@@ -1,7 +1,7 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { logoutFireThunk } from "@/redux/authSlice";
-import { setSubTitleNavigation, setTitleNavigation } from "@/redux/navigationSlice";
+import { setNavigation } from "@/redux/navigationSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,8 +18,7 @@ export function Configs({ user }: IConfigs) {
 
     const dispatch: AppDispatch = useDispatch()
     useEffect(() => {
-        dispatch(setTitleNavigation("Preferências"))
-        dispatch(setSubTitleNavigation("Dados pessoais e da aplicação"))
+        dispatch(setNavigation({id: 4, title: "Preferências", subtitle: "Dados pessoais e da aplicação"}))
     }, [dispatch]
     )
 

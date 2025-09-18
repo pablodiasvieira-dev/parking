@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
 import { ElementSituation, GarageBase } from '../../components/Garagem/garages'
 import { ModalDownUp } from '../../components/Modal/modal'
-import { setSubTitleNavigation, setTitleNavigation } from '../../redux/navigationSlice'
 import { TVagaOut } from '@/api/api'
+import { setNavigation } from '@/redux/navigationSlice'
 
 interface IGaragens {
     user: any
@@ -27,8 +27,7 @@ function Garagens({ user }: IGaragens) {
         item => item.bloco === garagensDataLista.filtros.blocoSelecionado ).length
 
     useEffect(() => {
-        dispatch(setTitleNavigation("Estacionamento"))
-        dispatch(setSubTitleNavigation("Prédio Público"))
+        dispatch(setNavigation({id: 3, title: "Estacionamento", subtitle: "Vagas por Bloco"}))
     }, [dispatch]
     )
     useEffect(() => {
