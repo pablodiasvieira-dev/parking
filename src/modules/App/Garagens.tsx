@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from '../../redux/store'
 import { ElementSituation, GarageBase } from '../../components/Garagem/garages'
 import { ModalDownUp } from '../../components/Modal/modal'
 import { setSubTitleNavigation, setTitleNavigation } from '../../redux/navigationSlice'
-import {  TVagaOut } from '@/api/api'
+import { TVagaOut } from '@/api/api'
 
 interface IGaragens {
     user: any
@@ -19,6 +19,12 @@ function Garagens({ user }: IGaragens) {
     const [vagaSelecionada, setVagaSelecionada] = useState<TVagaOut | null>(null)
     const vagaRefDireita = useRef<HTMLDivElement | null>(null)
     const vagaRefEsquerda = useRef<HTMLDivElement | null>(null)
+
+    const vagaLivreBloco = garagensDataLista.apiGaragens.filter(
+        item => item.bloco === garagensDataLista.filtros.blocoSelecionado && item.status === "unlock").length
+    
+    const vagasTotaisBloco = garagensDataLista.apiGaragens.filter(
+        item => item.bloco === garagensDataLista.filtros.blocoSelecionado ).length
 
     useEffect(() => {
         dispatch(setTitleNavigation("Estacionamento"))
@@ -52,50 +58,46 @@ function Garagens({ user }: IGaragens) {
                 <FiltroVagas blocoSelecionado={garagensDataLista.filtros.blocoSelecionado} />
                 <div className='conteudo w-full h-full px-8 flex flex-col overflow-y-auto'>
                     <div className='area-vagas w-full flex flex-row justify-between' >
-                        <div ref={vagaRefEsquerda} className='esquerda border-t-2 border-l-2 border-primary-foreground '>
+                        <div ref={vagaRefEsquerda} className='esquerda border-t-2 border-l-2 border-primary dark:border-primary-foreground '>
                             {garagensDataLista.apiGaragens
                                 .filter((garagens => garagens.bloco === garagensDataLista.filtros.blocoSelecionado && garagens.right === false))
                                 .map(
-                                (item, index) => (
-                                    <GarageBase key={index.toString()}
-                                        isRight={item.right}
-                                        numberVacancy={item.number}
-                                        statusVacancy={item.status}
-                                        isSelect={vagaSelecionada?.id === item.id}
-                                        clicaNaVaga={() => handleClickVaga(item)}
-                                        children={
-                                            <ElementSituation isRight={item.right} statusVacancy={item.status} />
-                                        }
-                                    />)
-                            )}
+                                    (item, index) => (
+                                        <GarageBase key={index.toString()}
+                                            isRight={item.right}
+                                            numberVacancy={item.number}
+                                            statusVacancy={item.status}
+                                            isSelect={vagaSelecionada?.id === item.id}
+                                            clicaNaVaga={() => handleClickVaga(item)}
+                                            children={
+                                                <ElementSituation isRight={item.right} statusVacancy={item.status} isSelect={vagaSelecionada?.id === item.id}/>
+                                            }
+                                        />)
+                                )}
                         </div>
-                        <div ref={vagaRefDireita} className='direita border-t-2 border-r-2 border-primary-foreground '>
+                        <div ref={vagaRefDireita} className='direita border-t-2 border-r-2 border-primary dark:border-primary-foreground '>
                             {garagensDataLista.apiGaragens
                                 .filter((garagens => garagens.bloco === garagensDataLista.filtros.blocoSelecionado && garagens.right))
                                 .map(
-                                (item, index) => (
-                                    <GarageBase key={index.toString()}
-                                        isRight={item.right}
-                                        numberVacancy={item.number}
-                                        statusVacancy={item.status}
-                                        isSelect={vagaSelecionada?.id === item.id}
-                                        clicaNaVaga={() => handleClickVaga(item)}
-                                        children={
-                                            <ElementSituation isRight={item.right} statusVacancy={item.status} />
-                                        }
-                                    />)
-                            )}
+                                    (item, index) => (
+                                        <GarageBase key={index.toString()}
+                                            isRight={item.right}
+                                            numberVacancy={item.number}
+                                            statusVacancy={item.status}
+                                            isSelect={vagaSelecionada?.id === item.id}
+                                            clicaNaVaga={() => handleClickVaga(item)}
+                                            children={
+                                                <ElementSituation isRight={item.right} statusVacancy={item.status} isSelect={vagaSelecionada?.id === item.id} />
+                                            }
+                                        />)
+                                )}
                         </div>
                     </div>
                 </div>
                 <ModalDownUp isSelect={!!vagaSelecionada}
-                    vagaSelecionada={`${vagaSelecionada?.number}-${vagaSelecionada?.bloco}`}
-                    vagaLivreBloco={garagensDataLista.apiGaragens.filter(
-                        item => item.bloco === garagensDataLista.filtros.blocoSelecionado && item.status === "unlock"
-                    ).length}
-                    vagasTotaisBloco={garagensDataLista.apiGaragens.filter(
-                        item => item.bloco === garagensDataLista.filtros.blocoSelecionado
-                    ).length} />
+                    vagaSelecionada={vagaSelecionada}
+                    vagaLivreBloco={vagaLivreBloco}
+                    vagasTotaisBloco={vagasTotaisBloco} />
             </div>
         </>
     )
