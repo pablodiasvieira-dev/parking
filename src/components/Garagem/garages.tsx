@@ -1,3 +1,4 @@
+import { TStatusVacancy } from '@/api/api';
 import { Clock10Icon, LockKeyholeIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 
@@ -5,21 +6,26 @@ interface garageProps {
     isRight: boolean;
     children?: ReactNode;
     numberVacancy?: string;
-    statusVacancy: string;
+    statusVacancy: TStatusVacancy;
     key?: string
-    clicaNaVaga?: () => void;
+    clicaNaVaga: () => void;
+    isSelect: boolean
 }
 
-export function GarageBase(props: garageProps) {
+export function GarageBase({isRight, children, numberVacancy, statusVacancy, clicaNaVaga, isSelect}: garageProps) {
     return (
         <>
-            <div className={`garagem-base border-b-2 border-primary w-32 h-18 hover:p-1 relative ${props.statusVacancy === "unlock" ? 'cursor-pointer' : 'cursor-not-allowed'} `}>
-                <div className='w-full h-full hover:border-2 rounded-md hover:bg-amber-600 '>
+            <div onClick={clicaNaVaga} className={`garagem-base border-b-2 border-primary-foreground w-32 h-18 relative flex justify-center items-center
+                    ${statusVacancy !== "lock" ? 'cursor-pointer' : 'cursor-not-allowed'} ` }>
+                <div className={`w-full h-full rounded-md  
+                        ${(statusVacancy === "lock" && !isSelect) && 'hover:bg-[repeating-linear-gradient(45deg,var(--secondary)_0_10px,transparent_10px_20px)]' }
+                        ${(statusVacancy !== "lock" && !isSelect) && 'hover:border-2 hover:border-primary hover:bg-primary/20 hover:max-w-[90%] hover:max-h-[90%]' }
+                        ${isSelect && ('bg-primary max-w-[90%] max-h-[90%]')}`}>
                     <div className='central w-full h-full flex justify-center items-center '>
-                        {props.children}
+                        {children}
                     </div>
-                    <div onClick={props.clicaNaVaga} className={`absolute text-sm bottom-0 text-black dark:text-primary-foreground  ${props.isRight ? 'left-0' : 'right-0'}`}>
-                        {props.numberVacancy}
+                    <div className={`absolute text-sm bottom-0 text-black dark:text-primary-foreground ${isRight ? 'left-0' : 'right-0'}`}>
+                        {numberVacancy}
                     </div>
                 </div>
             </div>

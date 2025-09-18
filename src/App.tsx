@@ -9,6 +9,9 @@ import { useEffect } from 'react';
 import { listenToAuthChanges } from './redux/authSlice';
 import { Skeleton } from './components/ui/skeleton';
 import { PrivateRoute } from './Routes/PrivateRoute';
+import { Configs } from './modules/App/Configs';
+import { Home } from './modules/App/Home';
+import Garagens from './modules/App/Garagens';
 
 function App() {
   const dispatch: AppDispatch = useDispatch()
@@ -41,10 +44,19 @@ function App() {
 
               <Route path='app' element={
                 <PrivateRoute> 
-                  <LayoutApp user={user} />
+                  <LayoutApp children={<Garagens user={user} />} />
                 </PrivateRoute>
                 } />
-
+              <Route path='home' element={
+                <PrivateRoute> 
+                  <LayoutApp children={<Home user={user} />} />
+                </PrivateRoute>
+                } />
+              <Route path='config' element={
+                <PrivateRoute> 
+                  <LayoutApp children={<Configs user={user} />} />
+                </PrivateRoute>
+                } />
             </Route>
           </Routes>
         </BrowserRouter>

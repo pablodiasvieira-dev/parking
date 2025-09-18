@@ -1,12 +1,16 @@
+export type TStatusVacancy = "lock" | "unlock" | "use" | "reserved"
+
 export interface Vacancy {
     id: string;
     number: string;
     right: boolean;
-    status: "lock" | "unlock" | "use" | "reserved"
+    status: TStatusVacancy
     bloco?: string;
     ordemNoBloco?: string
 }
-  
+
+export type TVagaOut = Omit<Vacancy, "right" | "ordemNoBloco">
+
 export interface Bloco {
     id: number;
     siglaBloco: string;
@@ -27,13 +31,13 @@ export const nomeBloco: Bloco[] = [
   //  status: 'lock', 'unlock', 'use', 'reserved'
 export const vacancyNumber: Vacancy[] = [
     // Bloco A
-    { id: "1", number: "101", right: false, status: "lock", bloco: "A", ordemNoBloco: "1" },
+    { id: "1", number: "101", right: false, status: "unlock", bloco: "A", ordemNoBloco: "1" },
     { id: "2", number: "102", right: false, status: "use", bloco: "A", ordemNoBloco: "2" },
     { id: "3", number: "103", right: false, status: "lock", bloco: "A", ordemNoBloco: "3" },
     { id: "4", number: "103", right: false, status: "lock", bloco: "A", ordemNoBloco: "4" },
     { id: "5", number: "104", right: false, status: "lock", bloco: "A", ordemNoBloco: "5" },
     { id: "6", number: "105", right: false, status: "unlock", bloco: "A", ordemNoBloco: "6" },
-    { id: "7", number: "106", right: false, status: "use", bloco: "A", ordemNoBloco: "7" },
+    { id: "7", number: "106", right: false, status: "unlock", bloco: "A", ordemNoBloco: "7" },
     { id: "8", number: "106", right: false, status: "use", bloco: "A", ordemNoBloco: "8" },
     { id: "9", number: "201", right: true, status: "unlock", bloco: "A", ordemNoBloco: "9" },
     { id: "10", number: "202", right: true, status: "use", bloco: "A", ordemNoBloco: "10" },
@@ -41,7 +45,7 @@ export const vacancyNumber: Vacancy[] = [
     { id: "12", number: "203", right: true, status: "reserved", bloco: "A", ordemNoBloco: "12" },
     { id: "13", number: "204", right: true, status: "use", bloco: "A", ordemNoBloco: "13" },
     { id: "14", number: "205", right: true, status: "use", bloco: "A", ordemNoBloco: "14" },
-    { id: "15", number: "206", right: true, status: "use", bloco: "A", ordemNoBloco: "15" },
+    { id: "15", number: "206", right: true, status: "unlock", bloco: "A", ordemNoBloco: "15" },
     { id: "16", number: "206", right: true, status: "use", bloco: "A", ordemNoBloco: "16" },
   
     // Bloco B

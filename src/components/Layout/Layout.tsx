@@ -4,7 +4,6 @@ import { MenuNavegacao } from '../nav-inferior'
 import { ModeToggle } from '../mode-toggle'
 import { BemVindo } from '@/modules/Entrada/BemVindo'
 import { Login } from '@/modules/Entrada/Login/Login'
-import Garagens from '@/modules/App/Garagens'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { useEffect } from 'react'
@@ -59,10 +58,10 @@ export function LayoutEntrada() {
 }
 
 interface ILayoutApp {
-    user: any
+    children: React.ReactNode
 }
 
-export function LayoutApp({ user }: ILayoutApp) {
+export function LayoutApp({ children }: ILayoutApp) {
     const navigationTitles = useSelector((state: RootState) => state.navegar)
     return (
         <>
@@ -70,7 +69,7 @@ export function LayoutApp({ user }: ILayoutApp) {
                 <Header title={navigationTitles.title} subtitle={navigationTitles.subtitle} />
             </header>
             <main className='main  flex flex-col w-full h-full  overflow-y-auto '>
-                <Garagens user={user} />
+                {children}
             </main>
             <footer>
                 <MenuNavegacao />
