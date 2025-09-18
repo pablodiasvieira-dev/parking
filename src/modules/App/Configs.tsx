@@ -1,6 +1,6 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { logoutFireThunk } from "@/redux/authSlice";
 import { setNavigation } from "@/redux/navigationSlice";
 import { AppDispatch, RootState } from "@/redux/store";
