@@ -12,6 +12,7 @@ import { PrivateRoute } from './Routes/PrivateRoute';
 import { Configs } from './modules/App/Configs';
 import { Home } from './modules/App/Home';
 import Garagens from './modules/App/Garagens';
+import { Toaster } from 'sonner';
 
 function App() {
   const dispatch: AppDispatch = useDispatch()
@@ -61,6 +62,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
+      <Toaster />
     </>
   )
 }

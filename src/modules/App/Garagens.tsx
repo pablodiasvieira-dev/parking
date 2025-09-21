@@ -94,6 +94,8 @@ function Garagens({ user }: IGaragens) {
                     </div>
                 </div>
                 <ModalDownUp isSelect={!!vagaSelecionada}
+                    blocoSelecionado={garagensDataLista.filtros.blocoSelecionado}
+                    listaVagasBloco={garagensDataLista.apiGaragens}
                     vagaSelecionada={vagaSelecionada}
                     vagaLivreBloco={vagaLivreBloco}
                     vagasTotaisBloco={vagasTotaisBloco} />

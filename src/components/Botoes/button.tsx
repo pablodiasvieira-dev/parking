@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 
 interface buttonProps {
@@ -44,20 +45,24 @@ export function BotaoTipoInicial(props: buttonProps) {
 
 interface IBotaoReservarVaga {
     executaAcao?: () => void
+    type?: "button" | "submit"
     configsSelectButton: {
         title: string;
         bgColor: string;
         isBlocked: boolean;
     }
+    classNameExt?: string
 }
 
-export function BotaoReservarVaga({  executaAcao, configsSelectButton }: IBotaoReservarVaga) {
+export function BotaoReservarVaga({  executaAcao, configsSelectButton, type = "button", classNameExt}: IBotaoReservarVaga) {
     return (
-        <Button variant="default"
-            className={`w-full h-full cursor-pointer rounded-none border-inherit bg-transparent shadow-none
+        <Button variant="default" type={type}
+            className={cn(`w-full h-full max-h-dvh cursor-pointer rounded-none border-inherit bg-transparent shadow-none
                 ${configsSelectButton.isBlocked ? 'cursor-not-allowed text-md' : 'cursor-pointer text-2xl'}
                 ${configsSelectButton.bgColor}
-                `}
+                `,
+                classNameExt
+            )}
             disabled={configsSelectButton.isBlocked}
             onClick={executaAcao}>
             {configsSelectButton.isBlocked ? 'Verificar Disponibilidade' : 'Reservar'}
