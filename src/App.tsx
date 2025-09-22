@@ -61,8 +61,8 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
+        <Toaster />
       </ThemeProvider>
-      <Toaster />
     </>
   )
 }

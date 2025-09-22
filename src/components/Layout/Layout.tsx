@@ -68,7 +68,7 @@ export function LayoutApp({ children }: ILayoutApp) {
             <header className='h-20 w-full overflow-hidden'>
                 <Header title={navigationTitles.title} subtitle={navigationTitles.subtitle} />
             </header>
-            <main className='main  flex flex-col w-full h-full  overflow-y-auto '>
+            <main className='main flex flex-col w-full h-full  overflow-y-hidden '>
                 {children}
             </main>
             <footer>

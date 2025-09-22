@@ -3,8 +3,8 @@ import { BotaoReservarVaga } from "../Botoes/button";
 import { Button } from "../ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerTrigger } from "../ui/drawer";
 import { FormReservar } from "./FormReserva";
-import { useState } from "react";
 import { Label } from "../ui/label";
+import { forwardRef } from "react";
 
 
 interface IModalDownUp {
@@ -14,12 +14,16 @@ interface IModalDownUp {
     vagaSelecionada?: TVagaOut | null;
     listaVagasBloco: TVagaOut[]
     blocoSelecionado?: string;
+    mostrarFormulario: boolean
+    setMostrarFormulario: (value: boolean) => void
 }
 
-export function ModalDownUp({ vagaLivreBloco, vagasTotaisBloco, isSelect, vagaSelecionada, listaVagasBloco, blocoSelecionado }: IModalDownUp) {
+export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
+    ( 
+        { vagaLivreBloco, vagasTotaisBloco, isSelect, vagaSelecionada, listaVagasBloco, 
+        blocoSelecionado, mostrarFormulario, setMostrarFormulario }: IModalDownUp, ref
+    ) => {
     // const [selecionaReservar, setSelecionaReservar] = useState(false)
-
-    const [mostrarFormulario, setMostrarFormulario] = useState(false)
 
     const nomeVaga = `${vagaSelecionada?.number}-${vagaSelecionada?.bloco}`
     const configsButton = {
@@ -55,7 +59,7 @@ export function ModalDownUp({ vagaLivreBloco, vagasTotaisBloco, isSelect, vagaSe
 
     return (
         <>
-            <div className="modal relative bottom-0 left-0 z-40 flex flex-col w-full h-fit bg-white gap-1 rounded-t-2xl shadow-[0px_-10px_10px_-1px_rgba(0,_0,_0,_0.45)]">
+            <div ref={ref} className="modal relative bottom-0 left-0 z-40 flex flex-col w-full h-fit bg-white gap-1 rounded-t-2xl shadow-[0px_-10px_10px_-1px_rgba(0,_0,_0,_0.45)]">
                 {!mostrarFormulario ? (
                     <div className="flex h-full w-full rounded-t-2xl">
                         <div className={`w-1/3 h-full  rounded-tl-2xl text-black font-light content-center ${isSelect && 'font-normal'}`}>
@@ -94,7 +98,7 @@ export function ModalDownUp({ vagaLivreBloco, vagasTotaisBloco, isSelect, vagaSe
             </div>
         </>
     )
-}
+})
 
 
 export function ModalDrawer() {
