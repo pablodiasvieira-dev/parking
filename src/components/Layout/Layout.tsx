@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 
 export function BaseLayout() {
     return (
-        <div className='flex flex-col w-full h-screen bg-background'>
+        <div className='@container flex flex-col w-full h-screen bg-background sm:max-w-xl sm:m-auto md:max-w-3xl xl:max-w-6xl m-0 text-center '>
             <Outlet />
         </div>
     )

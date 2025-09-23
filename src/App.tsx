@@ -26,7 +26,7 @@ function App() {
   if(isLoading) {
     return (
       <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
-        <div className='w-full, h-full flex justify-center items-center bg-background '>
+        <div className='w-full, h-full flex justify-center items-center bg-background'>
           <SkelectonInit />
         </div>
       </ThemeProvider>

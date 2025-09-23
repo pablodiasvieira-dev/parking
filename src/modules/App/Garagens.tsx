@@ -73,8 +73,8 @@ function Garagens({ user }: IGaragens) {
             <div className='w-full h-full flex flex-col overflow-y-hidden' >
                 <FiltroVagas blocoSelecionado={garagensDataLista.filtros.blocoSelecionado} />
                 <div className='conteudo w-full h-full px-8 py-1 flex flex-col overflow-y-auto'>
-                    <div className='area-vagas w-full flex flex-row justify-between' >
-                        <div ref={vagaRefEsquerda} className='esquerda border-t-2 border-l-2 border-primary dark:border-primary-foreground '>
+                    <div className='area-vagas w-full flex flex-row justify-between ' >
+                        <div ref={vagaRefEsquerda} className='esquerda border-t-2 border-l-2 border-primary dark:border-primary-foreground w'>
                             {garagensDataLista.apiGaragens
                                 .filter((garagens => garagens.bloco === garagensDataLista.filtros.blocoSelecionado && garagens.right === false))
                                 .map(
