@@ -42,7 +42,7 @@ function Garagens({ user }: IGaragens) {
             if (isClickInsideRadixComponent) {
                 return;
             }
-            
+
             if (
                 (vagaRefDireita.current && !vagaRefDireita.current.contains(event.target as Node)) &&
                 (vagaRefEsquerda.current && !vagaRefEsquerda.current.contains(event.target as Node)) &&
@@ -117,8 +117,8 @@ function Garagens({ user }: IGaragens) {
                     vagaSelecionada={vagaSelecionada}
                     vagaLivreBloco={vagaLivreBloco}
                     vagasTotaisBloco={vagasTotaisBloco}
-                    mostrarFormulario={mostrarFormulario}
-                    setMostrarFormulario={setMostrarFormulario} />
+                    exibirVaga={mostrarFormulario}
+                    setExibirVaga={setMostrarFormulario} />
             </div>
         </>
     )

@@ -4,7 +4,8 @@ import { Button } from "../ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerTrigger } from "../ui/drawer";
 import { FormReservar } from "./FormReserva";
 import { Label } from "../ui/label";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
+import { EraserIcon } from "lucide-react";
 
 
 interface IModalDownUp {
@@ -14,91 +15,121 @@ interface IModalDownUp {
     vagaSelecionada?: TVagaOut | null;
     listaVagasBloco: TVagaOut[]
     blocoSelecionado?: string;
-    mostrarFormulario: boolean
-    setMostrarFormulario: (value: boolean) => void
+    exibirVaga: boolean
+    setExibirVaga: (value: boolean) => void
 }
 
 export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
-    ( 
-        { vagaLivreBloco, vagasTotaisBloco, isSelect, vagaSelecionada, listaVagasBloco, 
-        blocoSelecionado, mostrarFormulario, setMostrarFormulario }: IModalDownUp, ref
+    (
+        { vagaLivreBloco, vagasTotaisBloco, isSelect, vagaSelecionada, listaVagasBloco,
+            blocoSelecionado, exibirVaga, setExibirVaga }: IModalDownUp, ref
     ) => {
-    // const [selecionaReservar, setSelecionaReservar] = useState(false)
+        const [mostrarFormReserva, setMostrarFormReserva] = useState(false)
 
-    const nomeVaga = `${vagaSelecionada?.number}-${vagaSelecionada?.bloco}`
-    const configsButton = {
-        unlock: { title: "Livre", bgColor: "bg-primary text-white", isBlocked: false },
-        lock: { title: "Não disponível", bgColor: "#FF0000", isBlocked: true },
-        reserved: { title: "Reservado", bgColor: "bg-gray-500 text-white", isBlocked: true },
-        use: { title: "Em uso", bgColor: "bg-gray-500 text-white", isBlocked: true },
-    }
-    const configSelectButton = (vagaSelecionada && configsButton[vagaSelecionada.status]) ?? {
-        title: "Reservar",
-        bgColor: "bg-primary text-white",
-        isBlocked: false
-    }
+        const nomeVaga = `${vagaSelecionada?.number}-${vagaSelecionada?.bloco}`
+        const configsButton = {
+            unlock: { title: "Livre", bgColor: "bg-primary text-white", isBlocked: false },
+            lock: { title: "Não disponível", bgColor: "#FF0000", isBlocked: true },
+            reserved: { title: "Reservado", bgColor: "bg-gray-500 text-white", isBlocked: true },
+            use: { title: "Em uso", bgColor: "bg-gray-500 text-white", isBlocked: true },
+        }
+        const configSelectButton = (vagaSelecionada && configsButton[vagaSelecionada.status]) ?? {
+            title: "Reservar",
+            bgColor: "bg-primary text-white",
+            isBlocked: false
+        }
 
-    // const handleClickReservar = () => {
-    //     setSelecionaReservar(!selecionaReservar)
-    // }
+        // const handleClickReservar = () => {
+        //     setSelecionaReservar(!selecionaReservar)
+        // }
+        const handleClickBotaoAcao = () => {
+            console.log(mostrarFormReserva)
+            setExibirVaga(true)
+            setMostrarFormReserva(true)
+        }
 
-    const BotaoDeAcao = (
-        <BotaoReservarVaga
-            configsSelectButton={configSelectButton}
-            executaAcao={() => setMostrarFormulario(true)} // Ação é apenas mudar o estado
-        />
-    )
-    const BotaoDeSubmit = (
-        <BotaoReservarVaga
-            configsSelectButton={{ ...configSelectButton, title: 'Confirmar Reserva' }} // Pode mudar o texto se quiser
-            type="submit" // Tipo é 'submit' para acionar o formulário
-            classNameExt="h-10"
-            executaAcao={() => setMostrarFormulario(false)}
-        />
-    )
+        const BotaoDeAcao = (
+            <BotaoReservarVaga
+                configsSelectButton={configSelectButton}
+                executaAcao={handleClickBotaoAcao} // Ação é apenas mudar o estado
+            />
+        )
+        const BotaoDeSubmit = (
+            <BotaoReservarVaga
+                configsSelectButton={{ ...configSelectButton, title: 'Confirmar Reserva' }} // Pode mudar o texto se quiser
+                type="submit" // Tipo é 'submit' para acionar o formulário
+                classNameExt="h-10 rounded-2xl"
+                executaAcao={() => setMostrarFormReserva(false)}
+            />
+        )
 
-    return (
-        <>
-            <div ref={ref} className="modal relative bottom-0 left-0 z-40 flex flex-col w-full h-fit bg-white gap-1 rounded-t-2xl shadow-[0px_-10px_10px_-1px_rgba(0,_0,_0,_0.45)]">
-                {!mostrarFormulario ? (
-                    <div className="flex h-full w-full rounded-t-2xl">
-                        <div className={`w-1/3 h-full  rounded-tl-2xl text-black font-light content-center ${isSelect && 'font-normal'}`}>
-                            <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : vagaLivreBloco}</span>
-                            {!isSelect && (<>/<span className="px-1.5">{vagasTotaisBloco}</span> </>)}
-                            <p>{isSelect ? configSelectButton.title : "Vagas Livres"}</p>
-                        </div>
-                        <div className={`w-2/3 h-full rounded-tr-2xl rounded-bl-2xl overflow-hidden`}>
-                            {BotaoDeAcao}
-                        </div>
+        const CardVagasLivresComBotao = (
+            (
+                <div className="flex h-16 w-full rounded-t-2xl">
+                    <div className={`w-1/3 h-full  rounded-tl-2xl text-black font-light content-center ${isSelect && 'font-normal'}`}>
+                        <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : vagaLivreBloco}</span>
+                        {!isSelect && (<>/<span className="px-1.5">{vagasTotaisBloco}</span> </>)}
+                        <p>{isSelect ? configSelectButton.title : "Vagas Livres"}</p>
                     </div>
-                ) : (
-                    <div className="w-full h-fit flex flex-col space-y-2 my-4 px-5">
-                        <Label className="pb-2 text-xl" >Dados da Reserva</Label>
-                        <div className="w-full h-fit flex flex-col">
-                            <FormReservar listaVagasBloco={listaVagasBloco} blocoSelecionado={blocoSelecionado}>
-                                {({ reset }) => (
-                                    <div className={`w-full h-full gap-1 flex`}>
-                                        <div className="flex-grow">
-                                            {BotaoDeSubmit}
-                                        </div>
-                                        <Button variant={"outline"}
-                                            type="button"
-                                            className="h-10 w-1/5 hover:text-orange-700"
-                                            onClick={() => reset()}
-                                        >Limpar</Button>
-                                    </div>
-                                )
-
-                                }
-                            </FormReservar>
-                        </div>
+                    <div className={`w-2/3 h-full rounded-tr-2xl rounded-bl-2xl overflow-hidden`}>
+                        {BotaoDeAcao}
                     </div>
-                )
-                }
+                </div>
+            )
+        )
+
+        const FormSelecionaVagaEReserva = (
+            <div className="w-full h-fit flex flex-col space-y-2 my-4 px-5">
+                <Label className="pb-2 text-xl" >Dados da Reserva</Label>
+                <div className="w-full h-fit flex flex-col">
+                    <FormReservar listaVagasBloco={listaVagasBloco} blocoSelecionado={blocoSelecionado}>
+                        {({ reset }) => (
+                            <div className={`w-full h-full gap-1 flex flex-col`}>
+                                <Button variant="ghost" type="button"
+                                    className="h-10 w-10 hover:text-orange-700"
+                                    onClick={() => reset()}> <EraserIcon/>
+                                </Button>
+                                <div className="flex-grow">
+                                    {BotaoDeSubmit}
+                                </div>
+                            </div>
+                        )
+                        }
+                    </FormReservar>
+                </div>
             </div>
-        </>
-    )
-})
+        )
+
+        const CanvaDadosDaVaga = (
+            <div className="w-full h-fit flex flex-col space-y-2 rounded-t-2xl">
+                <div className="flex h-16 w-full rounded-t-2xl">
+                    <div className={`w-1/3 h-full  rounded-tl-2xl text-black font-light content-center ${isSelect && 'font-normal'}`}>
+                        <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : vagaLivreBloco}</span>
+                        {!isSelect && (<>/<span className="px-1.5">{vagasTotaisBloco}</span> </>)}
+                        <p>{isSelect ? configSelectButton.title : "Vagas Livres"}</p>
+                    </div>
+                    <div className={`w-2/3 h-full rounded-tr-2xl rounded-bl-2xl overflow-hidden`}>
+                        {BotaoDeAcao}
+                    </div>
+                </div>
+                <Label className="pb-2 text-xl" >Informações</Label>
+                <div className="w-full h-fit flex flex-col">
+                    {vagaSelecionada?.number}
+                </div>
+            </div>
+        )
+
+        return (
+            <>
+                <div ref={ref} className="modal relative bottom-0 left-0 z-40 flex flex-col w-full h-fit
+                    bg-white gap-1 rounded-t-2xl shadow-[0px_-10px_10px_-1px_rgba(0,_0,_0,_0.45)]">
+                    {(!exibirVaga && !isSelect) && CardVagasLivresComBotao}
+                    {(exibirVaga && isSelect) && CanvaDadosDaVaga}
+                    {(exibirVaga && !isSelect) && FormSelecionaVagaEReserva}
+                </div>
+            </>
+        )
+    })
 
 
 export function ModalDrawer() {
