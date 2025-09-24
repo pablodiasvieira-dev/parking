@@ -1,6 +1,6 @@
 import { Header, HeaderApp, HeaderDesktop, HeaderEntrada } from '../Header/Header'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { MenuNavegacao } from '../nav-inferior'
+import { MenuNavegacao } from '../NavBar'
 import { ModeToggle } from '../mode-toggle'
 import { BemVindo } from '@/modules/Entrada/BemVindo'
 import { Login } from '@/modules/Entrada/Login/Login'
@@ -37,7 +37,7 @@ export function LayoutEntrada() {
     useEffect(() => {
         if (user) navigate("/app");
     }, [user, navigate])
-    
+
     return (
         <div className='flex flex-col w-full h-full'>
             <header className='h-44 w-full bg-primary overflow-hidden'>
@@ -71,7 +71,7 @@ export function LayoutApp({ children }: ILayoutApp) {
                     <Header title={navigationTitles.title} subtitle={navigationTitles.subtitle} />
                 </div>
                 <div className="hidden md:block w-full h-full">
-                    <HeaderDesktop  />
+                    <HeaderDesktop />
                 </div>
             </header>
             <main className='flex md:flex-col w-full h-full overflow-y-hidden '>

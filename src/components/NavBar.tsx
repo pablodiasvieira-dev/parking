@@ -68,7 +68,7 @@ export function MenuNavegacaoDesktop() {
                         <MenubarTrigger key={link.id} className="p-0 bg-transparent">
                             <Link
                                 to={link.to}
-                                className={`rounded-md transition-colors h-fit w-full min-w-24 px-4 py-2
+                                className={`rounded-md transition-colors h-fit w-full min-w-24 px-4 py-2 dark:text-white text-black
                                         ${menuSelecionado === link.id
                                         ? "bg-primary text-background"
                                         : "hover:bg-background hover:text-background-foreground"
