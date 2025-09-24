@@ -71,7 +71,7 @@ function Garagens({ user }: IGaragens) {
     return (
         <>
             <div className='conteudo w-full h-full flex flex-col md:flex-row overflow-y-hidden md:px-6 md:py-2 md:gap-4 '>
-                <div className='conteudo w-full md:min-w-2/3 h-full flex flex-col md:dark:bg-transparent md:bg-primary/10 rounded-xl'>
+                <div className='conteudo w-full md:min-w-2/3 h-full flex flex-col md:dark:bg-transparent md:bg-foreground rounded-xl'>
                     <FiltroVagas blocoSelecionado={garagensDataLista.filtros.blocoSelecionado} />
                     <div className='area-vagas w-full h-full flex md:flex-col justify-evenly items-center overflow-y-auto px-8 py-1 md:gap-8 ' >
                         <div ref={vagaRefEsquerda} className='esquerda flex flex-col md:flex-row gap-0 border-t-2 border-l-2 border-primary dark:border-primary-foreground '>

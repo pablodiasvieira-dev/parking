@@ -2,7 +2,7 @@ import carImage from "../../assets/carDarkCut1.png"
 import carImage2 from "../../assets/carDarkCut2.png"
 // import carImage3 from "../../assets/carRotateWhiteCut2.png"
 import carImage4 from "../../assets/carOrangeCut3.png"
-// import carImage5 from "../../assets/carWhiteCut3.png"
+import carImage5 from "../../assets/carWhiteCut3.png"
 
 export function LogoAppWelcome() {
     return (
@@ -36,9 +36,9 @@ export function LogoApp() {
 export function LogoAppEsquerdo() {
     return (
         <div className="w-full max-w-16 h-[80%] flex justify-center z-60">
-            <div className="border-r-2 border-y-2 rounded-r-[4px] border-primary  w-full h-full
+            <div className="border-r-2 border-y-2 rounded-r-[4px] border-white  w-full h-full
                 flex justify-start items-center pr-2">
-                <img className="dark:hidden h-[90%] w-full " src={carImage4} alt="Carro Logo do APP" />
+                <img className="dark:hidden h-[90%] w-full " src={carImage5} alt="Carro Logo do APP" />
                 <img className="hidden dark:block h-[90%] w-full" src={carImage4} alt="Carro Logo do APP" />
             </div>
         </div>

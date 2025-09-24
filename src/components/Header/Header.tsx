@@ -31,7 +31,7 @@ export function HeaderDesktop() {
         <div className='flex items-center sticky top-0 right-0 w-full h-full bg-transparent shadow-[0px_10px_10px_-1px_rgba(0,_0,_0,_0.25)]' >
             <div className="w-1/3 h-full flex gap-2 justify-between items-center pl-0">
                 <LogoAppEsquerdo />
-                <h1 className='font-bold w-full h-fit text-2xl text-primary dark:text-primary text-start'>
+                <h1 className='font-bold w-full h-fit text-2xl text-white dark:text-primary text-start'>
                     Parking App
                 </h1>
             </div>

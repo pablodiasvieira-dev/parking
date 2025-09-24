@@ -62,10 +62,10 @@ export function MenuNavegacaoDesktop() {
 
     return (
         <nav className="navegacao flex h-fit w-full justify-center align-middle">
-            <Menubar className="h-full flex my-0 border border-primary bg-primary/10  gap-2 rounded-lg">
+            <Menubar className="h-full flex my-0 border border-white dark:border-primary dark:bg-primary/10 bg-foreground  gap-2 rounded-lg">
                 <MenubarMenu>
                     {links.map((link) => (
-                        <MenubarTrigger key={link.id} className="p-0 bg-transparent">
+                        <MenubarTrigger key={link.id} className="p-0 ">
                             <Link
                                 to={link.to}
                                 className={`rounded-md transition-colors h-fit w-full min-w-24 px-4 py-2 dark:text-white text-black
