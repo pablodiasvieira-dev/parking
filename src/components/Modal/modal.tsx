@@ -121,7 +121,7 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
 
         return (
             <>
-                <div ref={ref} className="modal relative bottom-0 left-0 z-40 flex flex-col w-full h-fit
+                <div ref={ref} className="modal relative bottom-0 left-0 z-40 flex flex-col w-full h-fit md:min-w-1/3
                     bg-white gap-1 rounded-t-2xl shadow-[0px_-10px_10px_-1px_rgba(0,_0,_0,_0.45)]">
                     {(!exibirVaga && !isSelect) && CardVagasLivresComBotao}
                     {(exibirVaga && isSelect) && CanvaDadosDaVaga}

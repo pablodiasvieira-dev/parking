@@ -13,6 +13,7 @@ import { Configs } from './modules/App/Configs';
 import { Home } from './modules/App/Home';
 import Garagens from './modules/App/Garagens';
 import { Toaster } from 'sonner';
+import { Reservas } from './modules/App/Reservas';
 
 function App() {
   const dispatch: AppDispatch = useDispatch()
@@ -51,6 +52,11 @@ function App() {
               <Route path='home' element={
                 <PrivateRoute> 
                   <LayoutApp children={<Home user={user} />} />
+                </PrivateRoute>
+                } />
+              <Route path='reservas' element={
+                <PrivateRoute> 
+                  <LayoutApp children={<Reservas user={user} />} />
                 </PrivateRoute>
                 } />
               <Route path='config' element={

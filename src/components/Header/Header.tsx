@@ -1,17 +1,20 @@
+import { CircleUserRound } from "lucide-react";
 import carImage from "../../assets/carDarkCut1.png"
 import carImage2 from "../../assets/carDarkCut2.png"
+import { ModeToggle } from "../mode-toggle";
+import { MenuNavegacaoDesktop } from "../nav-inferior";
+import { Button } from "../ui/button";
 
 interface IHeader {
     title: string;
     subtitle: string;
 }
 
-
 export function Header(
     { title, subtitle }: IHeader
 ) {
     return (
-        <div className='flex sticky top-0 right-0 w-full h-full bg-primary z-50 shadow-[0px_10px_10px_-1px_rgba(0,_0,_0,_0.25)]' >
+        <div className='flex sticky top-0 right-0 w-full h-full bg-primary shadow-[0px_10px_10px_-1px_rgba(0,_0,_0,_0.25)]' >
             <div className="w-2/3 h-full flex flex-col gap-0 justify-center align-middle pl-8">
                 <h1 className='font-bold w-full h-fit text-2xl text-black text-start'>
                     {title}
@@ -20,6 +23,25 @@ export function Header(
             </div>
             <div className="w-1/3 h-full flex flex-col justify-start items-end">
                 <LogoApp />
+            </div>
+        </div>
+    )
+}
+export function HeaderDesktop() {
+    return (
+        <div className='flex items-center sticky top-0 right-0 w-full h-full bg-transparent dark:bg-primary/10 shadow-[0px_10px_10px_-1px_rgba(0,_0,_0,_0.25)]' >
+            <div className="w-1/3 h-full flex gap-4 justify-between items-center pl-1">
+                <LogoAppEsquerdo />
+                <h1 className='font-bold w-full h-fit text-2xl text-black dark:text-primary text-start'>
+                    Parking App
+                </h1>
+            </div>
+            <MenuNavegacaoDesktop />
+            <div className="w-1/3 h-full flex justify-end pr-2 items-center gap-2">
+                <ModeToggle />
+                <Button variant="outline" className="w-9 h-9 hover:cursor-pointer">
+                    <CircleUserRound className="w-full h-full m-0 p-0"/>
+                </Button>
             </div>
         </div>
     )
@@ -78,9 +100,18 @@ export function LogoEntrada() {
 
 export function LogoApp() {
     return (
-        <div className="w-full h-full pt-4 flex justify-end ">
+        <div className="w-full h-full pt-4 flex justify-end  z-60">
             <div className="border-l-2 border-t-2 rounded-tl-[4px] border-gray-900 pt-2 pl-2 w-16 h-full flex justify-end items-end">
-                <img className="h-full w-full" src={carImage2} alt="Carro Logo do APP" />
+                <img className="h-full w-full " src={carImage2} alt="Carro Logo do APP" />
+            </div>
+        </div>
+    )
+}
+export function LogoAppEsquerdo() {
+    return (
+        <div className="w-full h-full pt-4 flex justify-end  z-60">
+            <div className="border-r-2 border-t-2 rounded-tr-[4px] border-gray-900 pt-2 pr-2 w-16 h-full flex justify-end items-end">
+                <img className="h-full w-full rotate-y-180 " src={carImage2} alt="Carro Logo do APP" />
             </div>
         </div>
     )

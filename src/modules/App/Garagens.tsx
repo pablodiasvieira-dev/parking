@@ -46,7 +46,7 @@ function Garagens({ user }: IGaragens) {
             if (
                 (vagaRefDireita.current && !vagaRefDireita.current.contains(event.target as Node)) &&
                 (vagaRefEsquerda.current && !vagaRefEsquerda.current.contains(event.target as Node)) &&
-                (modalRef.current && !modalRef.current.contains(event.target as Node) )
+                (modalRef.current && !modalRef.current.contains(event.target as Node))
             ) {
                 setMostrarFormulario(false)
                 setVagaSelecionada(null)
@@ -70,11 +70,11 @@ function Garagens({ user }: IGaragens) {
 
     return (
         <>
-            <div className='w-full h-full flex flex-col overflow-y-hidden' >
-                <FiltroVagas blocoSelecionado={garagensDataLista.filtros.blocoSelecionado} />
-                <div className='conteudo w-full h-full px-8 py-1 flex flex-col overflow-y-auto'>
-                    <div className='area-vagas w-full flex flex-row justify-between ' >
-                        <div ref={vagaRefEsquerda} className='esquerda border-t-2 border-l-2 border-primary dark:border-primary-foreground w'>
+            <div className='conteudo w-full h-full flex flex-col md:flex-row overflow-y-hidden md:px-6 md:py-2 md:gap-4 '>
+                <div className='conteudo w-full md:min-w-2/3 h-full flex flex-col md:dark:bg-transparent md:bg-primary/10 rounded-xl'>
+                    <FiltroVagas blocoSelecionado={garagensDataLista.filtros.blocoSelecionado} />
+                    <div className='area-vagas w-full h-full flex md:flex-col justify-evenly items-center overflow-y-auto px-8 py-1 md:gap-8 ' >
+                        <div ref={vagaRefEsquerda} className='esquerda flex flex-col md:flex-row gap-0 border-t-2 border-l-2 border-primary dark:border-primary-foreground '>
                             {garagensDataLista.apiGaragens
                                 .filter((garagens => garagens.bloco === garagensDataLista.filtros.blocoSelecionado && garagens.right === false))
                                 .map(
@@ -91,7 +91,7 @@ function Garagens({ user }: IGaragens) {
                                         />)
                                 )}
                         </div>
-                        <div ref={vagaRefDireita} className='direita border-t-2 border-r-2 border-primary dark:border-primary-foreground '>
+                        <div ref={vagaRefDireita} className='direita flex flex-col md:flex-row border-t-2 md:border-t-0 md:border-b-2 border-r-2 md:border-l-2 md:border-r-0 border-primary dark:border-primary-foreground '>
                             {garagensDataLista.apiGaragens
                                 .filter((garagens => garagens.bloco === garagensDataLista.filtros.blocoSelecionado && garagens.right))
                                 .map(
@@ -110,7 +110,7 @@ function Garagens({ user }: IGaragens) {
                         </div>
                     </div>
                 </div>
-                <ModalDownUp ref = {modalRef}
+                <ModalDownUp ref={modalRef}
                     isSelect={!!vagaSelecionada}
                     blocoSelecionado={garagensDataLista.filtros.blocoSelecionado}
                     listaVagasBloco={garagensDataLista.apiGaragens}

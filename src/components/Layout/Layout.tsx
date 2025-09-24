@@ -1,4 +1,4 @@
-import { Header, HeaderApp, HeaderEntrada } from '../Header/Header'
+import { Header, HeaderApp, HeaderDesktop, HeaderEntrada } from '../Header/Header'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { MenuNavegacao } from '../nav-inferior'
 import { ModeToggle } from '../mode-toggle'
@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 
 export function BaseLayout() {
     return (
-        <div className='@container flex flex-col w-full h-screen bg-background sm:max-w-xl sm:m-auto md:max-w-3xl xl:max-w-6xl m-0 text-center '>
+        <div className='@container flex flex-col w-full h-screen bg-background m-0 text-center '>
             <Outlet />
         </div>
     )
@@ -63,15 +63,21 @@ interface ILayoutApp {
 
 export function LayoutApp({ children }: ILayoutApp) {
     const navigationTitles = useSelector((state: RootState) => state.navegar)
+
     return (
         <>
-            <header className='h-20 w-full overflow-hidden'>
-                <Header title={navigationTitles.title} subtitle={navigationTitles.subtitle} />
+            <header className='h-20 w-full overflow-hidden flex '>
+                <div className="block md:hidden h-full w-full">
+                    <Header title={navigationTitles.title} subtitle={navigationTitles.subtitle} />
+                </div>
+                <div className="hidden md:block w-full h-full">
+                    <HeaderDesktop  />
+                </div>
             </header>
-            <main className='main flex flex-col w-full h-full  overflow-y-hidden '>
+            <main className='flex md:flex-col w-full h-full overflow-y-hidden '>
                 {children}
             </main>
-            <footer>
+            <footer className="block md:hidden">
                 <MenuNavegacao />
             </footer>
         </>

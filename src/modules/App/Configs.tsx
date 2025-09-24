@@ -19,7 +19,7 @@ export function Configs({ user }: IConfigs) {
 
     const dispatch: AppDispatch = useDispatch()
     useEffect(() => {
-        dispatch(setNavigation({ id: 4, title: "Preferências", subtitle: "Dados pessoais e da aplicação" }))
+        dispatch(setNavigation({ id: 5, title: "Preferências", subtitle: "Dados pessoais e da aplicação" }))
     }, [dispatch]
     )
 

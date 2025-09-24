@@ -15,7 +15,8 @@ interface garageProps {
 export function GarageBase({isRight, children, numberVacancy, statusVacancy, clicaNaVaga, isSelect}: garageProps) {
     return (
         <>
-            <div onClick={clicaNaVaga} className={`garagem-base border-b-2 border-primary dark:border-primary-foreground w-32 h-18 relative flex justify-center items-center
+            <div onClick={clicaNaVaga} className={`garagem-base border-b-2 md:border-b-0 md:border-r-2 border-primary dark:border-primary-foreground relative flex justify-center items-center 
+                w-32 h-18 min-h-18 min-w-32 md:w-18 md:h-32 md:min-h-44 md:min-w-28
                     ${statusVacancy !== "lock" ? 'cursor-pointer' : 'cursor-not-allowed'} ` }>
                 <div className={`w-full h-full rounded-md  
                         ${(statusVacancy === "lock" && !isSelect) && 'hover:bg-[repeating-linear-gradient(45deg,var(--secondary)_0_10px,transparent_10px_20px)]' }
@@ -61,7 +62,7 @@ export function IconCar(props: IconCarProps) {
     return (
         <div>
             <svg height="100%" width="100%" version="1.1" id="logo-do-carro" 
-                className={`${props.isSelect ? 'fill-primary-foreground/90': 'fill-primary'} dark:fill-primary-foreground min-h-[72px] min-w-[72px]`}
+                className={`${props.isSelect ? 'fill-primary-foreground/90': 'fill-primary'} dark:fill-primary-foreground min-h-[72px] min-w-[72px]  md:rotate-90`}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 47.032 47.032"
                 transform={`${props.isRight ? 'matrix(-1, 0, 0, 1, 0, 0)rotate(90)' : 'matrix(-1, 0, 0, 1, 0, 0)rotate(-90)'}`}>
