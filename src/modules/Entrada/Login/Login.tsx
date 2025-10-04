@@ -3,8 +3,11 @@ import { useDispatch } from "react-redux"
 import { InputApp } from "../../../components/Form/Input"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
-import { createUserWithEmailThunk, loginWithEmailThunk, loginWithGoogleThunk } from "@/redux/authSlice"
+import { createUserWithEmailThunk, loginWithEmailThunk
+  // , loginWithGoogleThunk 
+} from "@/redux/authSlice"
 import { AppDispatch } from "@/redux/store"
+import { loginGoogleSupaThunk } from "@/redux/authSupaSlice"
 
 
 export function Login() {
@@ -25,7 +28,8 @@ export function Login() {
 
   const handleLoginEmail = async (email:string, password:string) => {
       try {
-          await dispatch(loginWithEmailThunk({email, password}))
+        await dispatch(loginWithEmailThunk({email, password})) //firebase
+          // await dispatch(loginWithEmailThunk({email, password})) // supabase
       } catch (error) {
           console.error(error)
       }
@@ -41,7 +45,8 @@ export function Login() {
   }
   const handleLoginGoogle = async () => {
       try {
-          await dispatch(loginWithGoogleThunk())
+          // await dispatch(loginWithGoogleThunk()) // firebase
+          await dispatch(loginGoogleSupaThunk()) // supabase
       } catch (error) {
           console.error(error)
       }

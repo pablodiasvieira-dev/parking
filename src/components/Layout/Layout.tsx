@@ -31,11 +31,13 @@ export function LayoutBemVindo() {
 
 
 export function LayoutEntrada() {
-    const user = useSelector((state: RootState) => state.auth.user);
+    // const user = useSelector((state: RootState) => state.auth.user);
+    const user = useSelector((state: RootState) => state.authsupa.user);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (user) navigate("/app");
+        
     }, [user, navigate])
 
     return (

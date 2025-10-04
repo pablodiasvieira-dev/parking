@@ -1,6 +1,6 @@
 import { supabase } from "./supabaseCliente"
 
-export const entrarComGoogle = async (): Promise<void> => {
+export const entrarComGoogleSupa = async (): Promise<void> => {
     const {data, error} = await supabase.auth
         .signInWithOAuth( {provider: "google"})
     if(error) {
@@ -10,5 +10,4 @@ export const entrarComGoogle = async (): Promise<void> => {
     if (data.url){
         window.location.href = data.url
     }
- 
 }
