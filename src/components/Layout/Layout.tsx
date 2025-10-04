@@ -4,9 +4,10 @@ import { MenuNavegacao } from '../NavBar'
 import { ModeToggle } from '../mode-toggle'
 import { BemVindo } from '@/modules/Entrada/BemVindo'
 import { Login } from '@/modules/Entrada/Login/Login'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/redux/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/redux/store'
 import { useEffect } from 'react'
+import { getBlocosThunk } from '@/redux/garagemSlice'
 
 export function BaseLayout() {
     return (
@@ -64,7 +65,14 @@ interface ILayoutApp {
 }
 
 export function LayoutApp({ children }: ILayoutApp) {
+    const dispatch: AppDispatch = useDispatch()
+    useEffect(() => {
+    // dispatch(listenToAuthChanges())
+    dispatch(getBlocosThunk())
+    }, [dispatch])
+
     const navigationTitles = useSelector((state: RootState) => state.navegar)
+    // const blocos = useSelector((state: RootState) => state.garagens.blocos)
 
     return (
         <>
