@@ -1,27 +1,39 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { vacancyNumber, Vacancy } from "../api/api";
-import { TBloco } from "@/constrains/models";
+import { TBloco, TGaragens, TVagasFiltradas } from "@/constrains/models";
 import { getBlocos } from "@/api/api-blocos";
+import { getGaragens, getVagasDisponiveis } from "@/api/api-garagens";
 
+export const getGaragensThunk = createAsyncThunk(
+    'garagens/getGaragensThunk', async () => {
+        return await getGaragens()
+    }
+)
 export const getBlocosThunk = createAsyncThunk(
     'garagens/getBlocosThunk', async () => {
         return await getBlocos()
     }
 )
+export const getVagasDisponiveisThunk = createAsyncThunk(
+    'garagens/getVagasDisponiveisThunk', async () => {
+        return await getVagasDisponiveis()
+    }
+)
 
 interface EstadoInicial {
-    apiGaragens: Vacancy[],
+    apiGaragens: TGaragens[],
     blocos: TBloco[],
+    vagasDisponiveis: TVagasFiltradas[] /// TODO: alterar
     filtros: {
-        blocoSelecionado: string,
+        blocoSelecionado: number,
     }
 }
 
 const estadoInicial: EstadoInicial = {
-    apiGaragens: vacancyNumber, 
+    apiGaragens: [],  /// VAIR VIR DA API
+    vagasDisponiveis: [],
     blocos: [],
     filtros: {
-        blocoSelecionado: 'A'
+        blocoSelecionado: 0
     }
 
 }
@@ -44,9 +56,18 @@ export const garagemSlice = createSlice({
                     state.blocos = action.payload
                 }
             })
+            .addCase(getGaragensThunk.fulfilled, (state, action: PayloadAction<TGaragens[]> )=> {
+                if(action.payload) {
+                    state.apiGaragens = action.payload
+                }
+            })
+            .addCase(getVagasDisponiveisThunk.fulfilled, (state, action )=> {
+                if(action.payload) {
+                    state.vagasDisponiveis = action.payload
+                }
+            })
     }
 })
-
 
 export const {filtroSetBloco} = garagemSlice.actions
 

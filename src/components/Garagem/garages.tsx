@@ -1,4 +1,5 @@
-import { TStatusVacancy } from '@/api/api';
+
+import { TStatusGaragem } from '@/constrains/models';
 import { Clock10Icon, LockKeyholeIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 
@@ -6,7 +7,7 @@ interface garageProps {
     isRight: boolean;
     children?: ReactNode;
     numberVacancy?: string;
-    statusVacancy: TStatusVacancy;
+    statusVacancy: TStatusGaragem;
     key?: string
     clicaNaVaga: () => void;
     isSelect: boolean

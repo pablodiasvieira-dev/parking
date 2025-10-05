@@ -1,4 +1,3 @@
-import { TVagaOut } from "@/api/api";
 import { BotaoReservarVaga } from "../Botoes/button";
 import { Button } from "../ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerTrigger } from "../ui/drawer";
@@ -6,6 +5,7 @@ import { FormReservar } from "./FormReserva";
 import { Label } from "../ui/label";
 import { forwardRef, useState } from "react";
 import { EraserIcon } from "lucide-react";
+import { TVagaOut } from "@/constrains/models";
 
 
 interface IModalDownUp {
@@ -13,20 +13,19 @@ interface IModalDownUp {
     vagaLivreBloco?: number;
     vagasTotaisBloco?: number;
     vagaSelecionada?: TVagaOut | null;
-    listaVagasBloco: TVagaOut[]
-    blocoSelecionado?: string;
+    blocoSelecionado?: number;
     exibirVaga: boolean
     setExibirVaga: (value: boolean) => void
 }
 
 export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
     (
-        { vagaLivreBloco, vagasTotaisBloco, isSelect, vagaSelecionada, listaVagasBloco,
+        { vagaLivreBloco, vagasTotaisBloco, isSelect, vagaSelecionada,
             blocoSelecionado, exibirVaga, setExibirVaga }: IModalDownUp, ref
     ) => {
         const [mostrarFormReserva, setMostrarFormReserva] = useState(false)
 
-        const nomeVaga = `${vagaSelecionada?.number}-${vagaSelecionada?.bloco}`
+        const nomeVaga = `${vagaSelecionada?.number}-${vagaSelecionada?.bloco_id}`
         const configsButton = {
             unlock: { title: "Livre", bgColor: "bg-primary text-white", isBlocked: false },
             lock: { title: "Não disponível", bgColor: "#FF0000", isBlocked: true },
@@ -82,7 +81,7 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
             <div className="w-full h-fit flex flex-col space-y-2 my-4 px-5">
                 <Label className="pb-2 text-xl" >Dados da Reserva</Label>
                 <div className="w-full h-fit flex flex-col">
-                    <FormReservar listaVagasBloco={listaVagasBloco} blocoSelecionado={blocoSelecionado}>
+                    <FormReservar blocoSelecionado={blocoSelecionado}>
                         {({ reset }) => (
                             <div className={`w-full h-full gap-1 flex flex-col`}>
                                 <Button variant="ghost" type="button"

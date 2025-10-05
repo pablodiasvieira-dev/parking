@@ -7,7 +7,7 @@ import { Login } from '@/modules/Entrada/Login/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
 import { useEffect } from 'react'
-import { getBlocosThunk } from '@/redux/garagemSlice'
+import { getBlocosThunk, getGaragensThunk, getVagasDisponiveisThunk } from '@/redux/garagemSlice'
 
 export function BaseLayout() {
     return (
@@ -69,10 +69,11 @@ export function LayoutApp({ children }: ILayoutApp) {
     useEffect(() => {
     // dispatch(listenToAuthChanges())
     dispatch(getBlocosThunk())
+    dispatch(getGaragensThunk())
+    dispatch(getVagasDisponiveisThunk())
     }, [dispatch])
 
     const navigationTitles = useSelector((state: RootState) => state.navegar)
-    // const blocos = useSelector((state: RootState) => state.garagens.blocos)
 
     return (
         <>
