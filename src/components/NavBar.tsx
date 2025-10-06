@@ -41,10 +41,10 @@ export function MenuNavegacao() {
             </div>
             <div className={`w-16 h-16 align-middle rounded-full cursor-pointer
                     hover:bg-amber-600 
-                    ${menuSelecionado === 4 ? 'bg-gray-900 dark:bg-background' : 'bg-inherit'}
+                    ${menuSelecionado === 5 ? 'bg-gray-900 dark:bg-background' : 'bg-inherit'}
                     `}
                 onClick={handleClickConfig} >
-                <User2Icon className={`hover:text-white w-full h-full p-4 ${menuSelecionado === 4 ? 'text-white' : 'text-gray-900 dark:text-secondary'} hover:text-white w-full h-full p-4`} />
+                <User2Icon className={`hover:text-white w-full h-full p-4 ${menuSelecionado === 5 ? 'text-white' : 'text-gray-900 dark:text-secondary'} hover:text-white w-full h-full p-4`} />
             </div>
         </nav>
     )

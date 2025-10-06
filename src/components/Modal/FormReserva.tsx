@@ -1,4 +1,3 @@
-import { TVagaOut } from "@/api/api";
 import { Form, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -7,14 +6,12 @@ import { toast } from "sonner"
 import { DataSelecaoReserva } from "./DataReserva";
 import { SelectVaga } from "./SelectVagaReserva";
 
-
 interface IFormReservarProps {
-    listaVagasBloco: TVagaOut[];
-    blocoSelecionado?: string;
+    blocoSelecionado?: number;
     children: (helpers: { reset: () => void }) => React.ReactNode
 }
 
-export function FormReservar({ listaVagasBloco, blocoSelecionado, children }: IFormReservarProps) {
+export function FormReservar({ blocoSelecionado, children }: IFormReservarProps) {
     const formSchema = z.object({
         codigoVaga: z.string({
             // required_error: "Por favor selecione uma vaga para reservar",
@@ -53,7 +50,6 @@ export function FormReservar({ listaVagasBloco, blocoSelecionado, children }: IF
                             <SelectVaga
                                 value={field.value}
                                 onChange={field.onChange}
-                                listaVagasBloco={listaVagasBloco}
                                 blocoSelecionado={blocoSelecionado} />
                             <FormMessage />
                         </FormItem>

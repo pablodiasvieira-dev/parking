@@ -12,13 +12,13 @@ export function BotaoBase(props: buttonProps) {
     return (
         <>
             <div className={`w-full h-full min-h-6 min-w-26 max-h-10
-            rounded-full items-center ${props.isSelected ? 'bg-amber-700 hover:bg-amber-800 ' : 'bg-amber-50 hover:bg-amber-300'}
+            rounded-full items-center ${props.isSelected ? 'bg-primary hover:bg-amber-700 ' : 'bg-amber-50 hover:bg-primary'}
             focus:ring-4 focus:outline-none focus:ring-amber-300`}>
                 <button
                     type='button'
                     className={`content-center h-full w-full text-[14px] cursor-pointer ${props.isSelected ?
-                        'text-white bg-amber-700 hover:bg-amber-800 focus:outline-none focus:ring-4 focus:ring-amber-300' :
-                        'text-amber-700 bg-amber-50 hover:bg-amber-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-amber-300'} 
+                        'text-white bg-primary hover:bg-amber-700 focus:outline-none focus:ring-4 focus:ring-amber-300' :
+                        'text-amber-700 bg-amber-50 hover:bg-primary hover:text-white focus:outline-none focus:ring-4 focus:ring-amber-300'} 
                     font-medium rounded-full text-center `}
                     onClick={props.executaAcao} >
                     {props.name}

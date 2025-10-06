@@ -6,7 +6,7 @@ import { ThemeProvider } from './components/theme-provider';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './redux/store';
 import { useEffect } from 'react';
-import { listenToAuthChanges } from './redux/authSlice';
+// import { listenToAuthChanges } from './redux/authSlice';
 import { Skeleton } from './components/ui/skeleton';
 import { PrivateRoute } from './Routes/PrivateRoute';
 import { Configs } from './modules/App/Configs';
@@ -14,17 +14,22 @@ import { Home } from './modules/App/Home';
 import Garagens from './modules/App/Garagens';
 import { Toaster } from 'sonner';
 import { Reservas } from './modules/App/Reservas';
+import { listenToAuthChangesSupa } from './db/supabase/listened';
 
 function App() {
   const dispatch: AppDispatch = useDispatch()
-  const user = useSelector((state: RootState) => state.auth.user)
-  const isLoading = useSelector((state: RootState) => state.auth.isLoading)
+  // const user = useSelector((state: RootState) => state.auth.user)
+  // const isLoading = useSelector((state: RootState) => state.auth.sisLoading)
+  const user = useSelector((state: RootState) => state.authsupa.user)
+  const isLoading = useSelector((state: RootState) => state.authsupa.isLoading) 
+  const session = useSelector((state: RootState) => state.authsupa.session) 
 
   useEffect(() => {
-    dispatch(listenToAuthChanges())
+    // dispatch(listenToAuthChanges())
+    dispatch(listenToAuthChangesSupa())
   }, [dispatch])
 
-  if(isLoading) {
+  if(isLoading && !session) {
     return (
       <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
         <div className='w-full, h-full flex justify-center items-center bg-background'>

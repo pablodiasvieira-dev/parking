@@ -1,36 +1,39 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { vacancyNumber, Vacancy } from "../api/api";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { TBloco, TGaragens, TVagasFiltradas } from "@/constrains/models";
+import { getBlocos } from "@/api/api-blocos";
+import { getGaragens, getVagasDisponiveis } from "@/api/api-garagens";
 
-interface Bloco {
-    id: number;
-    siglaBloco: string;
-    nomeBloco: string
-}
-
-const nomeBloco: Bloco[] = [
-    { id: 0, siglaBloco: "A", nomeBloco: "Bloco A" },
-    { id: 1, siglaBloco: "B", nomeBloco: "Bloco B" },
-    { id: 2, siglaBloco: "C", nomeBloco: "Bloco C" },
-    { id: 3, siglaBloco: "D", nomeBloco: "Bloco D" },
-    { id: 4, siglaBloco: "E", nomeBloco: "Bloco E" },
-    { id: 5, siglaBloco: "F", nomeBloco: "Bloco F" },
-    { id: 6, siglaBloco: "G", nomeBloco: "Bloco G" },
-    { id: 7, siglaBloco: "H", nomeBloco: "Bloco H" }
-]
+export const getGaragensThunk = createAsyncThunk(
+    'garagens/getGaragensThunk', async () => {
+        return await getGaragens()
+    }
+)
+export const getBlocosThunk = createAsyncThunk(
+    'garagens/getBlocosThunk', async () => {
+        return await getBlocos()
+    }
+)
+export const getVagasDisponiveisThunk = createAsyncThunk(
+    'garagens/getVagasDisponiveisThunk', async () => {
+        return await getVagasDisponiveis()
+    }
+)
 
 interface EstadoInicial {
-    apiGaragens: Vacancy[],
-    blocos: Bloco[],
+    apiGaragens: TGaragens[],
+    blocos: TBloco[],
+    vagasDisponiveis: TVagasFiltradas[] /// TODO: alterar
     filtros: {
-        blocoSelecionado: string,
+        blocoSelecionado: number,
     }
 }
 
 const estadoInicial: EstadoInicial = {
-    apiGaragens: vacancyNumber, 
-    blocos: nomeBloco,
+    apiGaragens: [],  /// VAIR VIR DA API
+    vagasDisponiveis: [],
+    blocos: [],
     filtros: {
-        blocoSelecionado: 'A'
+        blocoSelecionado: 0
     }
 
 }
@@ -45,9 +48,26 @@ export const garagemSlice = createSlice({
         // increment: (state) => {
         //     // state.valor += 1
         //     },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getBlocosThunk.fulfilled, (state, action: PayloadAction<TBloco[]> )=> {
+                if(action.payload) {
+                    state.blocos = action.payload
+                }
+            })
+            .addCase(getGaragensThunk.fulfilled, (state, action: PayloadAction<TGaragens[]> )=> {
+                if(action.payload) {
+                    state.apiGaragens = action.payload
+                }
+            })
+            .addCase(getVagasDisponiveisThunk.fulfilled, (state, action )=> {
+                if(action.payload) {
+                    state.vagasDisponiveis = action.payload
+                }
+            })
     }
 })
-
 
 export const {filtroSetBloco} = garagemSlice.actions
 

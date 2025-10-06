@@ -8,7 +8,8 @@ interface IPrivateRoute {
 }
 
 export function PrivateRoute({ children }: IPrivateRoute) {
-    const user  = useSelector((state: RootState) => state.auth.user)
+    // const user  = useSelector((state: RootState) => state.auth.user)
+    const user  = useSelector((state: RootState) => state.authsupa.user)
 
     if (!user) {
         return <Navigate to="/entrar" replace />;

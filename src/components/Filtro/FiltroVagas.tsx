@@ -3,32 +3,18 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import  { useEffect, useRef } from 'react'
 import { BotaoBase } from '../Botoes/button';
 import { filtroSetBloco } from '../../redux/garagemSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 interface filtroVagasProps {
-    blocoSelecionado: string,
+    blocoSelecionado: number,
 }
-
-interface Bloco {
-    id: number;
-    siglaBloco: string;
-    nomeBloco: string
-}
-
-const nomeBloco: Bloco[] = [
-    { id: 0, siglaBloco: "A", nomeBloco: "Bloco A" },
-    { id: 1, siglaBloco: "B", nomeBloco: "Bloco B" },
-    { id: 2, siglaBloco: "C", nomeBloco: "Bloco C" },
-    { id: 3, siglaBloco: "D", nomeBloco: "Bloco D" },
-    { id: 4, siglaBloco: "E", nomeBloco: "Bloco E" },
-    { id: 5, siglaBloco: "F", nomeBloco: "Bloco F" },
-    { id: 6, siglaBloco: "G", nomeBloco: "Bloco G" },
-    { id: 7, siglaBloco: "H", nomeBloco: "Bloco H" }
-]
-
 
 export default function FiltroVagas({blocoSelecionado} : filtroVagasProps) {
+    
     const dispatch = useDispatch()
+    const blocosState = useSelector((state: RootState) => state.garagens.blocos)
+
     const scrollRef = useRef<HTMLDivElement>(null)
     const itemRefs = useRef<Record<number, HTMLDivElement | null>>({})
     // const [blocoSelecionado, setBlocoSelecionado] = useState("A")
@@ -67,11 +53,11 @@ export default function FiltroVagas({blocoSelecionado} : filtroVagasProps) {
                 <ChevronLeft size={20} className='w-full h-full' />
             </button>
             <div ref={scrollRef} className='w-full h-full px-10 flex justify-start items-center gap-3 overflow-x-hidden scrollbar-hide'>
-                {nomeBloco.map((bloco) => (
+                {blocosState.map((bloco) => (
                     <div key={bloco.id} ref={(el) => { itemRefs.current[bloco.id] = el }} className='h-full min-w-26 flex items-center justify-center'>
-                        <BotaoBase name={bloco.nomeBloco} isSelected={bloco.siglaBloco === blocoSelecionado}
+                        <BotaoBase name={bloco.nome_bloco} isSelected={bloco.id === blocoSelecionado}
                             executaAcao={() => {
-                                dispatch( filtroSetBloco(bloco.siglaBloco) )
+                                dispatch( filtroSetBloco(bloco.id) )
                                 scrollToItem(bloco.id)
                             }} />
                     </div>

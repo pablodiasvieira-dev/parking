@@ -4,9 +4,10 @@ import { MenuNavegacao } from '../NavBar'
 import { ModeToggle } from '../mode-toggle'
 import { BemVindo } from '@/modules/Entrada/BemVindo'
 import { Login } from '@/modules/Entrada/Login/Login'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/redux/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/redux/store'
 import { useEffect } from 'react'
+import { getBlocosThunk, getGaragensThunk, getVagasDisponiveisThunk } from '@/redux/garagemSlice'
 
 export function BaseLayout() {
     return (
@@ -31,11 +32,13 @@ export function LayoutBemVindo() {
 
 
 export function LayoutEntrada() {
-    const user = useSelector((state: RootState) => state.auth.user);
+    // const user = useSelector((state: RootState) => state.auth.user);
+    const user = useSelector((state: RootState) => state.authsupa.user);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (user) navigate("/app");
+        
     }, [user, navigate])
 
     return (
@@ -62,6 +65,14 @@ interface ILayoutApp {
 }
 
 export function LayoutApp({ children }: ILayoutApp) {
+    const dispatch: AppDispatch = useDispatch()
+    useEffect(() => {
+    // dispatch(listenToAuthChanges())
+    dispatch(getBlocosThunk())
+    dispatch(getGaragensThunk())
+    dispatch(getVagasDisponiveisThunk())
+    }, [dispatch])
+
     const navigationTitles = useSelector((state: RootState) => state.navegar)
 
     return (
