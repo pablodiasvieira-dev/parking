@@ -63,27 +63,25 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
         )
 
         const CardVagasLivresComBotao = (
-            (
-                <div className="flex h-16 w-full rounded-t-2xl">
-                    <div className={`w-1/3 h-full  rounded-tl-2xl text-black font-light content-center ${isSelect && 'font-normal'}`}>
-                        <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : vagaLivreBloco}</span>
-                        {!isSelect && (<>/<span className="px-1.5">{vagasTotaisBloco}</span> </>)}
-                        <p>{isSelect ? configSelectButton.title : "Vagas Livres"}</p>
-                    </div>
-                    <div className={`w-2/3 h-full rounded-tr-2xl rounded-bl-2xl overflow-hidden`}>
-                        {BotaoDeAcao}
-                    </div>
+            <div className="flex h-fit min-h-16 w-full rounded-t-2xl">
+                <div className={`w-1/3 h-full  rounded-tl-2xl text-black font-light content-center ${isSelect && 'font-normal'}`}>
+                    <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : vagaLivreBloco}</span>
+                    {!isSelect && (<>/<span className="px-1.5">{vagasTotaisBloco}</span> </>)}
+                    <p>{isSelect ? configSelectButton.title : "Vagas Livres"}</p>
                 </div>
-            )
+                <div className={`w-2/3 h-full rounded-tr-2xl rounded-bl-2xl overflow-hidden`}>
+                    {BotaoDeAcao}
+                </div>
+            </div>
         )
 
         const FormSelecionaVagaEReserva = (
-            <div className="w-full h-fit flex flex-col space-y-2 my-4 px-5">
+            <div className="w-full h-fit min-h-16 flex flex-col space-y-2 my-4 px-5">
                 <Label className="pb-2 text-xl" >Dados da Reserva</Label>
                 <div className="w-full h-fit flex flex-col">
                     <FormReservar blocoSelecionado={blocoSelecionado}>
                         {({ reset }) => (
-                            <div className={`w-full h-full gap-1 flex flex-col`}>
+                            <div className={`w-full h-fit gap-1 flex flex-col`}>
                                 <Button variant="ghost" type="button"
                                     className="h-10 w-10 hover:text-orange-700"
                                     onClick={() => reset()}> <EraserIcon/>
@@ -100,8 +98,8 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
         )
 
         const CanvaDadosDaVaga = (
-            <div className="w-full h-fit flex flex-col space-y-2 rounded-t-2xl">
-                <div className="flex h-16 w-full rounded-t-2xl">
+            <div className="w-full h-fit min-h-16 flex flex-col space-y-2 rounded-t-2xl">
+                <div className="flex h-fit min-h-16 w-full rounded-t-2xl">
                     <div className={`w-1/3 h-full  rounded-tl-2xl text-black font-light content-center ${isSelect && 'font-normal'}`}>
                         <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : vagaLivreBloco}</span>
                         {!isSelect && (<>/<span className="px-1.5">{vagasTotaisBloco}</span> </>)}
@@ -119,14 +117,13 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
         )
 
         return (
-            <>
-                <div ref={ref} className="modal relative bottom-0 left-0 z-40 flex flex-col w-full h-fit md:min-w-1/3
-                    bg-white gap-1 rounded-t-2xl shadow-[0px_-10px_10px_-1px_rgba(0,_0,_0,_0.45)]">
-                    {(!exibirVaga && !isSelect) && CardVagasLivresComBotao}
-                    {(exibirVaga && isSelect) && CanvaDadosDaVaga}
-                    {(exibirVaga && !isSelect) && FormSelecionaVagaEReserva}
-                </div>
-            </>
+            <div ref={ref} className="modal sticky bottom-0 z-40 flex flex-col w-full h-fit md:min-w-1/3
+                bg-white gap-1 rounded-t-2xl shadow-[0px_-10px_10px_-1px_rgba(0,_0,_0,_0.45)]">
+                {(!exibirVaga && !isSelect) && CardVagasLivresComBotao}
+                {(exibirVaga && isSelect) && CanvaDadosDaVaga}
+                {(exibirVaga && !isSelect) && FormSelecionaVagaEReserva}
+            </div>
+
         )
     })
 
