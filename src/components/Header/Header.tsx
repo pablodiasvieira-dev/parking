@@ -3,6 +3,7 @@ import { ModeToggle } from "../mode-toggle";
 import { MenuNavegacaoDesktop } from "../NavBar";
 import { Button } from "../ui/button";
 import { LogoApp, LogoAppEsquerdo, LogoAppWelcome, LogoEntrada } from "./Logo";
+import { Link } from "react-router";
 
 interface IHeader {
     title: string;
@@ -38,9 +39,11 @@ export function HeaderDesktop() {
             <MenuNavegacaoDesktop />
             <div className="w-1/3 h-full flex justify-end pr-2 items-center gap-2">
                 <ModeToggle />
-                <Button variant="outline" className="w-9 h-9 hover:cursor-pointer">
-                    <CircleUserRound className="w-full h-full m-0 p-0" />
-                </Button>
+                <Link to='/config'>
+                    <Button variant="outline" className="w-9 h-9 hover:cursor-pointer dark:text-white text-gray-300 ">
+                        <CircleUserRound className="w-full h-full m-0 p-0" />
+                    </Button>
+                </Link>
             </div>
         </div>
     )
