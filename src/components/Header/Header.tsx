@@ -1,9 +1,10 @@
-import { CircleUserRound } from "lucide-react";
-import { ModeToggle } from "../mode-toggle";
+import { BoltIcon } from "lucide-react";
+import { ModeToggle } from "../Botoes/mode-toggle";
 import { MenuNavegacaoDesktop } from "../NavBar";
 import { Button } from "../ui/button";
 import { LogoApp, LogoAppEsquerdo, LogoAppWelcome, LogoEntrada } from "./Logo";
 import { Link } from "react-router";
+import { ProfileToggle } from "../Botoes/profile-toogle";
 
 interface IHeader {
     title: string;
@@ -40,10 +41,11 @@ export function HeaderDesktop() {
             <div className="w-1/3 h-full flex justify-end pr-2 items-center gap-2">
                 <ModeToggle />
                 <Link to='/config'>
-                    <Button variant="outline" className="w-9 h-9 hover:cursor-pointer dark:text-white text-gray-300 ">
-                        <CircleUserRound className="w-full h-full m-0 p-0" />
+                    <Button variant="ghost" className="w-9 h-9 hover:cursor-pointer bg-secondary dark:text-white text-primary rounded-full ">
+                        <BoltIcon className="w-full h-full m-0 p-0" />
                     </Button>
                 </Link>
+                    <ProfileToggle/>
             </div>
         </div>
     )

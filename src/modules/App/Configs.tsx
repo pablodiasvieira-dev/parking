@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/mode-toggle";
+import { ModeToggle } from "@/components/Botoes/mode-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

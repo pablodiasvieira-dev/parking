@@ -1,7 +1,7 @@
 import { Header, HeaderApp, HeaderDesktop, HeaderEntrada } from '../Header/Header'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { MenuNavegacao } from '../NavBar'
-import { ModeToggle } from '../mode-toggle'
+import { ModeToggle } from '../Botoes/mode-toggle'
 import { BemVindo } from '@/modules/Entrada/BemVindo'
 import { Login } from '@/modules/Entrada/Login/Login'
 import { useDispatch, useSelector } from 'react-redux'
@@ -39,7 +39,7 @@ export function LayoutEntrada() {
 
     useEffect(() => {
         if (user) navigate("/app");
-        
+
     }, [user, navigate])
 
     return (
@@ -68,14 +68,14 @@ interface ILayoutApp {
 export function LayoutApp({ children }: ILayoutApp) {
     const dispatch: AppDispatch = useDispatch()
     useEffect(() => {
-    // dispatch(listenToAuthChanges())
-    dispatch(getBlocosThunk())
-    dispatch(getGaragensThunk())
-    dispatch(getVagasDisponiveisThunk())
+        // dispatch(listenToAuthChanges())
+        dispatch(getBlocosThunk())
+        dispatch(getGaragensThunk())
+        dispatch(getVagasDisponiveisThunk())
     }, [dispatch])
 
     const navigationTitles = useSelector((state: RootState) => state.navegar)
-        const isDesktop = useMediaQuery('(min-width: 768px)') // mais ou menos o tamanho md
+    const isDesktop = useMediaQuery('(min-width: 768px)') // mais ou menos o tamanho md
     return (
         <>
             <header className='h-20 w-full overflow-hidden flex '>
@@ -84,7 +84,7 @@ export function LayoutApp({ children }: ILayoutApp) {
                         <HeaderDesktop />
                     ) : (
                         <Header title={navigationTitles.title} subtitle={navigationTitles.subtitle} />
-                    )} 
+                    )}
                 </div>
             </header>
             <main className='flex md:flex-col w-full h-full overflow-y-hidden '>
