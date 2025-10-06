@@ -90,9 +90,11 @@ export function LayoutApp({ children }: ILayoutApp) {
             <main className='flex md:flex-col w-full h-full overflow-y-hidden '>
                 {children}
             </main>
-            <footer className="block md:hidden">
-                <MenuNavegacao />
-            </footer>
+            {!isDesktop &&
+                <footer>
+                    <MenuNavegacao />
+                </footer>
+            }
         </>
     )
 }
