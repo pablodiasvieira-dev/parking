@@ -117,10 +117,12 @@ function Garagens({ user }: IGaragens) {
                         </div>
                     </div>
                 </div>
-                <div className='modal sticky bottom-0 z-40 bg-white md:bg-foreground
+                <div className='modal sticky bottom-0 z-40 
+                    bg-white md:bg-foreground 
+                    md:dark:backdrop-blur-md md:dark:backdrop-opacity-72 md:dark:bg-white/5 md:dark:border-[.05rem] md:dark:border-foreground/10
                     flex flex-col w-full h-fit md:min-w-1/3
-                    gap-1 rounded-t-2xl shadow-[0px_-10px_10px_-1px_rgba(0,_0,_0,_0.45)]
-                    md:h-full md:rounded-b-2xl md:shadow-none md:static md:bottom-full md:z-0
+                    gap-1 rounded-t-2xl shadow-[0px_-10px_10px_-1px_rgba(0,_0,_0,_0.45)] md:shadow-none
+                    md:h-full md:rounded-b-2xl  md:static md:bottom-full md:z-0
                 '>
                     <ModalDownUp ref={modalRef}
                         isSelect={!!vagaSelecionada}
