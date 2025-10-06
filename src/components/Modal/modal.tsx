@@ -106,7 +106,7 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
             <div className="w-full h-fit min-h-16 flex flex-col space-y-2 rounded-t-2xl bg-inherit md:dark:text-white">
                 <div className="w-full h-full flex flex-col gap-2 justify-center items-center">
                     {
-                        !isDesktop ? (
+                        isDesktop ? (
                             <>
                                 <Card className="w-2/3">
                                     <CardHeader>
