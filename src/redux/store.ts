@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import  garagemSlice  from './garagemSlice'
 import  navigationSlice from './navigationSlice'
-import  authSlice  from './authSlice'
+// import  authSlice  from './authSlice'
 import  authSupaSlice  from './authSupaSlice'
 
 export const store = configureStore( {
     reducer: {
         garagens: garagemSlice,
         navegar: navigationSlice,
-        auth: authSlice,
+        // auth: authSlice,
         authsupa: authSupaSlice,
     }
     // {
