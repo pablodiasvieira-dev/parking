@@ -7,7 +7,7 @@ import { forwardRef, useState } from "react";
 import { EraserIcon } from "lucide-react";
 import { TVagaOut } from "@/constrains/models";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 
 interface IModalDownUp {
@@ -68,16 +68,31 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
         )
 
         const CardVagasLivresComBotao = (
-            <div className="flex h-fit min-h-16 w-full rounded-t-2xl md:flex-col md:justify-center md:gap-3">
-                <div className={`w-1/3 md:w-full h-full  rounded-tl-2xl text-black md:dark:text-white font-light content-center ${isSelect && 'font-normal'}`}>
-                    <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : vagaLivreBloco}</span>
-                    {!isSelect && (<>/<span className="px-1.5">{vagasTotaisBloco}</span> </>)}
-                    <p>{isSelect ? configSelectButton.title : "Vagas Livres"}</p>
+            isDesktop ? (
+                <div className="flex h-fit min-h-16 w-full rounded-t-2xl md:flex-col md:justify-center md:gap-3">
+                    <Card className="w-2/3">
+                        <CardHeader>
+                            <CardDescription>Vagas Livres</CardDescription>
+                            <CardTitle className="text-4xl font-semibold tabular-nums @[250px]/card:text-3xl">{vagaLivreBloco}</CardTitle>
+                        </CardHeader>
+                        
+                    </Card>
+                    <div className={`w-2/3 md:w-full h-full rounded-tr-2xl md:rounded-full rounded-bl-2xl overflow-hidden`}>
+                        {BotaoDeAcao}
+                    </div>
                 </div>
-                <div className={`w-2/3 md:w-full h-full rounded-tr-2xl md:rounded-full rounded-bl-2xl overflow-hidden`}>
-                    {BotaoDeAcao}
+            ) : (
+                <div className="flex h-fit min-h-16 w-full rounded-t-2xl md:flex-col md:justify-center md:gap-3">
+                    <div className={`w-1/3 md:w-full h-full  rounded-tl-2xl text-black md:dark:text-white font-light content-center ${isSelect && 'font-normal'}`}>
+                        <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : vagaLivreBloco}</span>
+                        {!isSelect && (<>/<span className="px-1.5">{vagasTotaisBloco}</span> </>)}
+                        <p>{isSelect ? configSelectButton.title : "Vagas Livres"}</p>
+                    </div>
+                    <div className={`w-2/3 md:w-full h-full rounded-tr-2xl md:rounded-full rounded-bl-2xl overflow-hidden`}>
+                        {BotaoDeAcao}
+                    </div>
                 </div>
-            </div>
+            )
         )
 
         const FormSelecionaVagaEReserva = (
@@ -113,7 +128,7 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
                                         <CardTitle className="text-2xl">{nomeVaga}</CardTitle>
                                     </CardHeader>
                                     <CardContent>
-                                        Status: {configSelectButton.title }
+                                        Status: {configSelectButton.title}
                                     </CardContent>
                                 </Card>
                                 <div className={`w-full h-full rounded-full overflow-hidden`}>
