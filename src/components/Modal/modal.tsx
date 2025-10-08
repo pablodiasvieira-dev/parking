@@ -77,7 +77,7 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
                             <CardDescription>Vagas Livres</CardDescription>
                             <CardTitle className="text-4xl font-semibold tabular-nums @[250px]/card:text-3xl">{vagaLivreBloco}</CardTitle>
                         </CardHeader>
-
+                        
                     </Card>
                     <div className={`w-2/3 md:w-full h-full rounded-tr-2xl md:rounded-full rounded-bl-2xl overflow-hidden`}>
                         {BotaoDeAcao}
@@ -94,7 +94,7 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
                         {BotaoDeAcao}
                     </div>
                 </div>
-            </div>
+            )
         )
 
         const FormSelecionaVagaEReserva = (
