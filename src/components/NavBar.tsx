@@ -57,7 +57,7 @@ export function MenuNavegacaoDesktop() {
         { id: 2, to: "/home", label: "Dashboard" },
         { id: 3, to: "/app", label: "Garagens" },
         { id: 4, to: "/reservas", label: "Reservas" },
-        { id: 5, to: "/config", label: "Conta" },
+        // { id: 5, to: "/config", label: "Conta" },
     ]
 
     return (

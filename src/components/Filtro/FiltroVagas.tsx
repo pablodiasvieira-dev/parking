@@ -46,13 +46,13 @@ export default function FiltroVagas({blocoSelecionado} : filtroVagasProps) {
 
     useEffect(() => { }, [dispatch]);
     return (
-        <div className='filtros-vagas relative h-20 w-full flex items-center justify-center overflow-x-hidden shadow-[0px_10px_10px_-1px_rgba(0,_0,_0,_0.25)]'>
+        <div className='filtros-vagas relative md:px-2 h-20 w-full flex items-center justify-center overflow-x-hidden shadow-[0px_10px_10px_-1px_rgba(0,_0,_0,_0.25)]'>
             <button
                 onClick={() => scroll('left')}
-                className="absolute left-0 z-20 w-8 h-8 p-2 bg-gray-800 bg-opacity-75 text-white rounded-full flex items-center justify-center">
+                className="absolute md:static left-0 md:left-2 z-20 w-8 h-8 p-2 bg-gray-800 bg-opacity-75 text-white rounded-full flex items-center justify-center">
                 <ChevronLeft size={20} className='w-full h-full' />
             </button>
-            <div ref={scrollRef} className='w-full h-full px-10 flex justify-start items-center gap-3 overflow-x-hidden scrollbar-hide'>
+            <div ref={scrollRef} className='w-full h-full px-10 md:px-2 flex justify-start  items-center gap-3 md:gap-2 overflow-x-hidden '>
                 {blocosState.map((bloco) => (
                     <div key={bloco.id} ref={(el) => { itemRefs.current[bloco.id] = el }} className='h-full min-w-26 flex items-center justify-center'>
                         <BotaoBase name={bloco.nome_bloco} isSelected={bloco.id === blocoSelecionado}
@@ -65,7 +65,7 @@ export default function FiltroVagas({blocoSelecionado} : filtroVagasProps) {
             </div>
             <button
                 onClick={() => scroll('right')}
-                className="absolute right-0 z-20 w-8 h-8 p-2 bg-gray-800 bg-opacity-75 text-white rounded-full flex items-center justify-center">
+                className="absolute md:static right-0 md:right-2 z-20 w-8 h-8 p-2 bg-gray-800 bg-opacity-75 text-white rounded-full flex items-center justify-center">
                 <ChevronRight size={20} className='w-full h-full' />
             </button>
         </div>

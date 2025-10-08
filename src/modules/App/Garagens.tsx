@@ -75,8 +75,8 @@ function Garagens({ user }: IGaragens) {
 
     return (
         <>
-            <div className='conteudo w-full h-full flex flex-col md:flex-row overflow-y-hidden md:px-6 md:py-2 md:gap-4'>
-                <div className='conteudo w-full md:min-w-2/3 h-full flex flex-col bg-foreground dark:bg-transparent md:rounded-xl'>
+            <div className='conteudo w-full h-full flex flex-col md:flex-row overflow-y-hidden md:px-6 md:py-2 md:justify-between md:gap-4'>
+                <div className='area-vagas w-full md:min-w-2/3 h-full flex flex-col bg-foreground dark:bg-transparent md:rounded-xl'>
                     <FiltroVagas blocoSelecionado={garagensDataLista.filtros.blocoSelecionado} />
                     <div className='area-vagas w-full h-full flex md:flex-col justify-evenly items-center overflow-y-auto px-8 py-1 md:gap-8 ' >
                         <div ref={vagaRefEsquerda} className='esquerda flex flex-col md:flex-row gap-0 border-t-2 border-l-2 border-primary dark:border-primary-foreground '>
@@ -117,10 +117,12 @@ function Garagens({ user }: IGaragens) {
                         </div>
                     </div>
                 </div>
-                <div className='modal sticky bottom-0 z-40 bg-white md:bg-foreground
-                    flex flex-col w-full h-fit md:min-w-1/3
-                    gap-1 rounded-t-2xl shadow-[0px_-10px_10px_-1px_rgba(0,_0,_0,_0.45)]
-                    md:h-full md:rounded-b-2xl md:shadow-none md:static md:bottom-full md:z-0
+                <div className='modal sticky bottom-0 z-40 
+                    bg-white md:bg-foreground 
+                    md:dark:backdrop-blur-md md:dark:backdrop-opacity-72 md:dark:bg-white/5 md:dark:border-[.05rem] md:dark:border-foreground/10
+                    flex flex-col w-full h-fit
+                    gap-1 rounded-t-2xl shadow-[0px_-10px_10px_-1px_rgba(0,_0,_0,_0.45)] md:shadow-none
+                    md:h-full md:rounded-b-2xl  md:static md:bottom-full md:z-0 md
                 '>
                     <ModalDownUp ref={modalRef}
                         isSelect={!!vagaSelecionada}

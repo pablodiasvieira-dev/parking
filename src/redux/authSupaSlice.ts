@@ -1,10 +1,28 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {  Session } from '@supabase/supabase-js'
-import { entrarComGoogleSupa } from "@/db/supabase/authSupa";
+import { createUserWithEmail, deslogarSupa, entrarComGoogleSupa, loginUserWithEmail } from "@/db/supabase/authSupa";
 
 export const loginGoogleSupaThunk = createAsyncThunk(
     'authSupa/loginGoogleSupaThunk', async () => {
         await entrarComGoogleSupa()
+    }
+)
+
+export const loginEmailThunk = createAsyncThunk(
+    'auth/loginEmailThunk', async ({email, password}: {email: string, password: string}) => {
+        return await loginUserWithEmail(email, password)
+    }
+)
+
+export const createUserEmailSupaThunk = createAsyncThunk(
+    'auth/createUserEmailSupaThunk', async ({nome, email, password}: {nome:string, email: string, password: string} ) => {
+        return await createUserWithEmail(nome, email, password)
+    }
+)
+
+export const logoutSupaThunk = createAsyncThunk(
+    'auth/logoutSupaThunk', async () => {
+        return await deslogarSupa()
     }
 )
 

@@ -56,7 +56,7 @@ export function DataSelecaoReserva({ value, onChange }: DataSelecaoReservaProps)
         <Popover open={isOpen} onOpenChange={setIsOpen}>
             <PopoverTrigger asChild>
                 <Button
-                    variant={"outline"}
+                    variant={"outline"} type="button"
                     className={cn(
                         "w-full bg-transparent justify-start text-left font-normal hover:text-primary",
                         !value && "text-muted-foreground"
