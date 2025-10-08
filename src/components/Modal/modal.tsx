@@ -92,7 +92,7 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
                         {BotaoDeAcao}
                     </div>
                 </div>
-            )
+            </div>
         )
 
         const FormSelecionaVagaEReserva = (
