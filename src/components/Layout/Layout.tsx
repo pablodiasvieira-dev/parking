@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
 import { useEffect } from 'react'
 import { getBlocosThunk, getGaragensThunk, getVagasDisponiveisThunk } from '@/redux/garagemSlice'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 export function BaseLayout() {
     return (
