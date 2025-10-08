@@ -20,6 +20,8 @@ interface IModalDownUp {
     setExibirVaga: (value: boolean) => void
 }
 
+// TESTE ADICIONADO
+
 export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
     (
         { vagaLivreBloco, vagasTotaisBloco, isSelect, vagaSelecionada,
@@ -92,7 +94,7 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
                         {BotaoDeAcao}
                     </div>
                 </div>
-            </div>
+            )
         )
 
         const FormSelecionaVagaEReserva = (
