@@ -7,8 +7,10 @@ import { forwardRef, useState } from "react";
 import { EraserIcon } from "lucide-react";
 import { TVagaOut } from "@/constrains/models";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-
+import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Badge } from "../ui/badge";
+import vagaImg from "../../assets/vaga/img07.jpeg"
+import estacionamentoImg from "../../assets/vaga/img03.jpg"
 
 interface IModalDownUp {
     isSelect: boolean;
@@ -19,8 +21,6 @@ interface IModalDownUp {
     exibirVaga: boolean
     setExibirVaga: (value: boolean) => void
 }
-
-// TESTE ADICIONADO
 
 export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
     (
@@ -71,14 +71,44 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
 
         const CardVagasLivresComBotao = (
             isDesktop ? (
-                <div className="flex h-fit min-h-16 w-full rounded-t-2xl md:flex-col md:justify-center md:gap-3">
-                    <Card className="w-2/3">
-                        <CardHeader>
-                            <CardDescription>Vagas Livres</CardDescription>
-                            <CardTitle className="text-4xl font-semibold tabular-nums @[250px]/card:text-3xl">{vagaLivreBloco}</CardTitle>
-                        </CardHeader>
-                        
-                    </Card>
+                <div className="flex flex-col h-fit min-h-16 w-full rounded-t-2xl md:flex-col md:justify-center md:gap-3 md:items-center md:px-8 md:py-4">
+                    <div className="w-full flex">
+                        <Badge variant="default" className="text-gray-800 dark:text-white">Estacionamento</Badge>
+                    </div>
+                    <img src={estacionamentoImg} alt="visualizacao da vaga" className="h-52 w-full object-cover rounded-lg shadow-sm dark:shadow-gray-800 filter grayscale" />
+                    <div className="w-full flex justify-between">
+                        <div className="w-4/5 flex flex-col items-start">
+                            <h1 className="text-xl text-gray-700 dark:text-foreground font-semibold">Condomínio Residencial Golden</h1>
+                            <h2 className="text-sm text-gray-700 font-semibold dark:text-foreground">Rua Pirapitinga, 7716</h2>
+                        </div>
+                        <div className="w-1/5 dark:text-white text-gray-900">⭐5.0</div>
+                    </div>
+                    <div className="w-full flex flex-wrap gap-4 justify-evenly">
+                        <Card className="w-36 h-20 p-1 bg-primary/80 text-black border-none">
+                            <CardHeader>
+                                <CardDescription className="text-black text-[.7rem] font-medium">Vagas Livres</CardDescription>
+                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{vagaLivreBloco}</CardTitle>
+                            </CardHeader>
+                        </Card>
+                        <Card className="w-36 h-20 p-1 bg-primary/60 text-black border-none">
+                            <CardHeader>
+                                <CardDescription className="text-black text-[.7rem] font-medium">Em Uso</CardDescription>
+                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{vagaLivreBloco}</CardTitle>
+                            </CardHeader>
+                        </Card>
+                        <Card className="w-36 h-20 p-1 bg-rose-400 text-black border-none">
+                            <CardHeader>
+                                <CardDescription className="text-black text-[.7rem] font-medium">Bloqueadas</CardDescription>
+                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{vagaLivreBloco}</CardTitle>
+                            </CardHeader>
+                        </Card>
+                        <Card className="w-36 h-20 p-1 bg-background dark:text-white text-black border-none">
+                            <CardHeader>
+                                <CardDescription className="dark:text-white text-black text-[.7rem] font-medium">Total de Vagas</CardDescription>
+                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{vagaLivreBloco}</CardTitle>
+                            </CardHeader>
+                        </Card>
+                    </div>
                     <div className={`w-2/3 md:w-full h-full rounded-tr-2xl md:rounded-full rounded-bl-2xl overflow-hidden`}>
                         {BotaoDeAcao}
                     </div>
@@ -120,19 +150,28 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
         )
 
         const CanvaDadosDaVaga = (
-            <div className="w-full h-fit min-h-16 flex flex-col space-y-2 rounded-t-2xl bg-inherit md:dark:text-white">
-                <div className="w-full h-full flex flex-col gap-2 justify-center items-center">
+            <div className="w-full h-fit min-h-16 flex flex-col space-y-2 rounded-t-2xl bg-inherit md:dark:text-white ">
+                <div className="w-full h-full flex flex-col gap-2 justify-center items-center md:px-8 md:py-4">
                     {
                         isDesktop ? (
                             <>
-                                <Card className="w-2/3">
-                                    <CardHeader>
-                                        <CardTitle className="text-2xl">{nomeVaga}</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        Status: {configSelectButton.title}
-                                    </CardContent>
-                                </Card>
+                                <div className="w-full flex">
+                                    <Badge variant="default" className="text-gray-800 dark:text-white">{configSelectButton.title}</Badge>
+                                </div>
+                                <img src={vagaImg} alt="visualizacao da vaga" className="h-52 w-full object-cover rounded-lg shadow-sm dark:shadow-gray-800 filter grayscale" />
+                                <div className="w-full flex justify-between">
+                                    <div className="w-4/5 flex flex-col items-start">
+                                        <p className="text-xl text-gray-700 dark:text-foreground">Vaga: <span className="text-primary font-bold">{nomeVaga}</span></p>
+                                        <h2 className="text-sm text-gray-700 font-semibold dark:text-foreground">Dimensões:
+                                            <span className="text-gray-900 font-normal dark:text-white"> 2m x 6m (L x P)</span></h2>
+                                    </div>
+                                    <div className="w-1/5">⭐5.0</div>
+                                </div>
+                                <div className="w-full flex gap-2">
+                                    <Badge variant="outline" className="text-gray-800 dark:text-white">Acessível</Badge>
+                                    <Badge variant="outline" className="text-gray-800 dark:text-white">Coberta</Badge>
+                                    <Badge variant="outline" className="text-gray-800 dark:text-white">Ponto de Carga</Badge>
+                                </div>
                                 <div className={`w-full h-full rounded-full overflow-hidden`}>
                                     {BotaoDeAcao}
                                 </div>
