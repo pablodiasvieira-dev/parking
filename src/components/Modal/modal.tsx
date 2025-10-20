@@ -12,10 +12,17 @@ import { Badge } from "../ui/badge";
 import vagaImg from "../../assets/vaga/img07.jpeg"
 import estacionamentoImg from "../../assets/vaga/img03.jpg"
 
+type TStatisticBloco = {
+    livres: number 
+    em_uso: number 
+    reservadas: number 
+    bloqueadas?: number 
+    totais: number
+}
+
 interface IModalDownUp {
     isSelect: boolean;
-    vagaLivreBloco?: number;
-    vagasTotaisBloco?: number;
+    statsVagasBloco?: TStatisticBloco
     vagaSelecionada?: TVagaOut | null;
     blocoSelecionado?: number;
     exibirVaga: boolean
@@ -24,7 +31,7 @@ interface IModalDownUp {
 
 export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
     (
-        { vagaLivreBloco, vagasTotaisBloco, isSelect, vagaSelecionada,
+        {  isSelect, vagaSelecionada, statsVagasBloco,
             blocoSelecionado, exibirVaga, setExibirVaga }: IModalDownUp, ref
     ) => {
         const [mostrarFormReserva, setMostrarFormReserva] = useState(false)
@@ -87,25 +94,25 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
                         <Card className="w-36 h-20 p-1 bg-primary/80 text-black border-none">
                             <CardHeader>
                                 <CardDescription className="text-black text-[.7rem] font-medium">Vagas Livres</CardDescription>
-                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{vagaLivreBloco}</CardTitle>
+                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{statsVagasBloco?.livres}</CardTitle>
                             </CardHeader>
                         </Card>
                         <Card className="w-36 h-20 p-1 bg-primary/60 text-black border-none">
                             <CardHeader>
                                 <CardDescription className="text-black text-[.7rem] font-medium">Em Uso</CardDescription>
-                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{vagaLivreBloco}</CardTitle>
+                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{statsVagasBloco?.em_uso}</CardTitle>
                             </CardHeader>
                         </Card>
                         <Card className="w-36 h-20 p-1 bg-rose-400 text-black border-none">
                             <CardHeader>
-                                <CardDescription className="text-black text-[.7rem] font-medium">Bloqueadas</CardDescription>
-                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{vagaLivreBloco}</CardTitle>
+                                <CardDescription className="text-black text-[.7rem] font-medium">Reservadas</CardDescription>
+                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{statsVagasBloco?.reservadas}</CardTitle>
                             </CardHeader>
                         </Card>
                         <Card className="w-36 h-20 p-1 bg-background dark:text-white text-black border-none">
                             <CardHeader>
                                 <CardDescription className="dark:text-white text-black text-[.7rem] font-medium">Total de Vagas</CardDescription>
-                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{vagaLivreBloco}</CardTitle>
+                                <CardTitle className="text-2xl font-bold tabular-nums @[250px]/card:text-3xl">{statsVagasBloco?.totais}</CardTitle>
                             </CardHeader>
                         </Card>
                     </div>
@@ -116,8 +123,8 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
             ) : (
                 <div className="flex h-fit min-h-16 w-full rounded-t-2xl md:flex-col md:justify-center md:gap-3">
                     <div className={`w-1/3 md:w-full h-full  rounded-tl-2xl text-black md:dark:text-white font-light content-center ${isSelect && 'font-normal'}`}>
-                        <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : vagaLivreBloco}</span>
-                        {!isSelect && (<>/<span className="px-1.5">{vagasTotaisBloco}</span> </>)}
+                        <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : statsVagasBloco?.livres}</span>
+                        {!isSelect && (<>/<span className="px-1.5">{statsVagasBloco?.totais}</span> </>)}
                         <p>{isSelect ? configSelectButton.title : "Vagas Livres"}</p>
                     </div>
                     <div className={`w-2/3 md:w-full h-full rounded-tr-2xl md:rounded-full rounded-bl-2xl overflow-hidden`}>
@@ -179,8 +186,8 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
                         ) : (
                             <div className="flex h-fit min-h-16 w-full rounded-t-2xl">
                                 <div className={`w-1/3 h-full  rounded-tl-2xl text-black font-light content-center ${isSelect && 'font-normal'}`}>
-                                    <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : vagaLivreBloco}</span>
-                                    {!isSelect && (<>/<span className="px-1.5">{vagasTotaisBloco}</span> </>)}
+                                    <span className={`font-semibold px-1.5 ${isSelect ? 'text-2xl' : 'text-4xl'}`} >{isSelect ? nomeVaga : statsVagasBloco?.livres}</span>
+                                    {!isSelect && (<>/<span className="px-1.5">{statsVagasBloco?.totais}</span> </>)}
                                     <p>{isSelect ? configSelectButton.title : "Vagas Livres"}</p>
                                 </div>
                                 <div className={`w-2/3 h-full rounded-tr-2xl rounded-bl-2xl overflow-hidden`}>

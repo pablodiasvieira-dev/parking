@@ -24,11 +24,12 @@ function Garagens({ user }: IGaragens) {
 
     const [mostrarFormulario, setMostrarFormulario] = useState(false)
 
-    const vagaLivreBloco = garagensDataLista.apiGaragens.filter(
-        item => item.bloco_id === garagensDataLista.filtros.blocoSelecionado && item.status === "unlock").length
-
-    const vagasTotaisBloco = garagensDataLista.apiGaragens.filter(
-        item => item.bloco_id === garagensDataLista.filtros.blocoSelecionado).length
+    const statisticsBloco = {
+        livres: garagensDataLista.apiGaragens.filter(item => item.bloco_id === garagensDataLista.filtros.blocoSelecionado && item.status === "unlock").length,
+        em_uso: garagensDataLista.apiGaragens.filter(item => item.bloco_id === garagensDataLista.filtros.blocoSelecionado && item.status === "use").length,
+        reservadas: garagensDataLista.apiGaragens.filter(item => item.bloco_id === garagensDataLista.filtros.blocoSelecionado && item.status === "reserved").length,
+        totais: garagensDataLista.apiGaragens.filter(item => item.bloco_id === garagensDataLista.filtros.blocoSelecionado).length
+    }
 
     useEffect(() => {
         dispatch(setNavigation({ id: 3, title: "Estacionamento", subtitle: "Vagas por Bloco" }))
@@ -126,10 +127,9 @@ function Garagens({ user }: IGaragens) {
                 '>
                     <ModalDownUp ref={modalRef}
                         isSelect={!!vagaSelecionada}
+                        statsVagasBloco = { statisticsBloco }
                         blocoSelecionado={garagensDataLista.filtros.blocoSelecionado}
                         vagaSelecionada={vagaSelecionada}
-                        vagaLivreBloco={vagaLivreBloco}
-                        vagasTotaisBloco={vagasTotaisBloco}
                         exibirVaga={mostrarFormulario}
                         setExibirVaga={setMostrarFormulario} />
                 </div>
