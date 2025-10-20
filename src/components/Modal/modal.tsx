@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerTrigger } from "../ui/drawer";
 import { FormReservar } from "./FormReserva";
 import { Label } from "../ui/label";
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { EraserIcon } from "lucide-react";
 import { TVagaOut } from "@/constrains/models";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -37,6 +37,7 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
             blocoSelecionado, exibirVaga, setExibirVaga }: IModalDownUp, ref
     ) => {
         const [mostrarFormReserva, setMostrarFormReserva] = useState(false)
+        const [isReservarVaga, setIsReservarVaga] = useState(false)
         const listaBlocos = useSelector( (state: RootState) => state.garagens.blocos )
 
         const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -59,9 +60,10 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
         //     setSelecionaReservar(!selecionaReservar)
         // }
         const handleClickBotaoAcao = () => {
-            console.log(mostrarFormReserva)
+            // console.log(mostrarFormReserva)
             setExibirVaga(true)
             setMostrarFormReserva(true)
+            setIsReservarVaga(true)
         }
 
         const BotaoDeAcao = (
@@ -75,7 +77,10 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
                 configsSelectButton={{ ...configSelectButton, title: 'Confirmar Reserva' }} // Pode mudar o texto se quiser
                 type="submit" // Tipo é 'submit' para acionar o formulário
                 classNameExt="h-10 rounded-2xl"
-                executaAcao={() => setMostrarFormReserva(false)}
+                executaAcao={() => {
+                    setMostrarFormReserva(false)
+                    setIsReservarVaga(false)
+                } }
             />
         )
 
@@ -139,9 +144,9 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
 
         const FormSelecionaVagaEReserva = (
             <div className="w-full h-fit min-h-16 flex flex-col space-y-2 my-4 px-5 md:dark:text-white">
-                <Label className="pb-2 text-xl" >Dados da Reserva</Label>
+                {!isReservarVaga && <Label className="pb-2 text-xl" >Dados da Reserva</Label>}
                 <div className="w-full h-fit flex flex-col">
-                    <FormReservar blocoSelecionado={blocoSelecionado}>
+                    <FormReservar blocoSelecionado={blocoSelecionado} vagaSelecionada={vagaSelecionada?.id}>
                         {({ reset }) => (
                             <div className={`w-full h-fit gap-1 flex flex-col`}>
                                 <Button variant="ghost" type="button"
@@ -166,7 +171,7 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
                         isDesktop ? (
                             <>
                                 <div className="w-full flex">
-                                    <Badge variant="default" className="text-gray-800 dark:text-white">{configSelectButton.title}</Badge>
+                                    <Badge variant="default" className="text-gray-800">{configSelectButton.title}</Badge>
                                 </div>
                                 <img src={vagaImg} alt="visualizacao da vaga" className="h-52 w-full object-cover rounded-lg shadow-sm dark:shadow-gray-800 filter grayscale" />
                                 <div className="w-full flex justify-between">
@@ -183,7 +188,7 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
                                     <Badge variant="outline" className="text-gray-800 dark:text-white">Ponto de Carga</Badge>
                                 </div>
                                 <div className={`w-full h-full rounded-full overflow-hidden`}>
-                                    {BotaoDeAcao}
+                                    { !isReservarVaga && BotaoDeAcao}
                                 </div>
                             </>
                         ) : (
@@ -203,12 +208,19 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
             </div>
         )
 
+        useEffect ( () => {
+            console.log("exibirVaga ", exibirVaga, "isSelect ", isSelect, "mostrarFormReserva ", mostrarFormReserva, "isReservarVaga ", isReservarVaga )
+            if( (!exibirVaga && !isSelect && mostrarFormReserva && isReservarVaga )  ) {
+                setMostrarFormReserva(false)
+                setIsReservarVaga(false)
+            }
+        }, [exibirVaga, isSelect, mostrarFormReserva, isReservarVaga, vagaSelecionada] )
         return (
             <div ref={ref}
                 className="w-full h-full md:p-2 ">
                 {(!exibirVaga && !isSelect) && CardVagasLivresComBotao}
                 {(exibirVaga && isSelect) && CanvaDadosDaVaga}
-                {(exibirVaga && !isSelect) && FormSelecionaVagaEReserva}
+                {( exibirVaga && (!isSelect && mostrarFormReserva) || (isSelect && isReservarVaga) ) && FormSelecionaVagaEReserva}
             </div>
 
         )

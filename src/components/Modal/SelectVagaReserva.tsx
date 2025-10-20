@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 interface ISelectVaga {
     blocoSelecionado?: number
-    value: string
+    value: number
     onChange: (value: string) => void
 }
 export function SelectVaga({ blocoSelecionado, value, onChange }: ISelectVaga) {
@@ -12,7 +12,7 @@ export function SelectVaga({ blocoSelecionado, value, onChange }: ISelectVaga) {
     const blocosState = useSelector( (state: RootState) => state.garagens.blocos)
 
     return (
-        <Select onValueChange={onChange} defaultValue={value}>
+        <Select onValueChange={onChange} defaultValue={value.toString()}>
             <SelectTrigger className="w-full fill-background">
                 <SelectValue placeholder="Selecione uma vaga" />
             </SelectTrigger>
@@ -28,7 +28,7 @@ export function SelectVaga({ blocoSelecionado, value, onChange }: ISelectVaga) {
                                     .filter( blocoComVagas => blocoComVagas.bloco_id == bloco.id )
                                     .map((vagasDoBloc) => (
                                         vagasDoBloc.vagas.map((vaga) => (
-                                            <SelectItem key={vaga.id} value={vaga.number}>{
+                                            <SelectItem key={vaga.id} value={vaga.id.toString()}>{
                                             `${vaga.number}-${vagasDoBloc.sigla_bloco}`
                                         }</SelectItem>
                                         ))

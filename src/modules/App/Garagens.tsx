@@ -66,7 +66,6 @@ function Garagens({ user }: IGaragens) {
                 id: vagaAtual.id,
                 number: vagaAtual.number,
                 bloco_id: vagaAtual.bloco_id,
-
                 status: vagaAtual.status
             })
         } else {

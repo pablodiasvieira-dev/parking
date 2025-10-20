@@ -7,13 +7,14 @@ import { DataSelecaoReserva } from "./DataReserva";
 import { SelectVaga } from "./SelectVagaReserva";
 
 interface IFormReservarProps {
+    vagaSelecionada?: number
     blocoSelecionado?: number;
     children: (helpers: { reset: () => void }) => React.ReactNode
 }
 
-export function FormReservar({ blocoSelecionado, children }: IFormReservarProps) {
+export function FormReservar({ blocoSelecionado, vagaSelecionada, children }: IFormReservarProps) {
     const formSchema = z.object({
-        codigoVaga: z.string({
+        codigoVaga: z.number({
             // required_error: "Por favor selecione uma vaga para reservar",
         }),
         periodo: z.object({
@@ -24,7 +25,7 @@ export function FormReservar({ blocoSelecionado, children }: IFormReservarProps)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            codigoVaga: "",
+            codigoVaga: vagaSelecionada,
             periodo: undefined
         }
     })
