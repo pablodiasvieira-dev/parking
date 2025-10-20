@@ -11,6 +11,8 @@ import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
 import vagaImg from "../../assets/vaga/img07.jpeg"
 import estacionamentoImg from "../../assets/vaga/img03.jpg"
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 
 type TStatisticBloco = {
     livres: number 
@@ -35,10 +37,11 @@ export const ModalDownUp = forwardRef<HTMLDivElement, IModalDownUp>(
             blocoSelecionado, exibirVaga, setExibirVaga }: IModalDownUp, ref
     ) => {
         const [mostrarFormReserva, setMostrarFormReserva] = useState(false)
+        const listaBlocos = useSelector( (state: RootState) => state.garagens.blocos )
 
         const isDesktop = useMediaQuery('(min-width: 768px)')
 
-        const nomeVaga = `${vagaSelecionada?.number}-${vagaSelecionada?.bloco_id}`
+        const nomeVaga = `${vagaSelecionada?.number}-${listaBlocos.find(item => item.id === vagaSelecionada?.bloco_id)?.sigla_bloco || ''}`
         // TODO: pegar o nome complto da vaga para nao parecer o id
         const configsButton = {
             unlock: { title: "Livre", bgColor: "bg-primary text-white", isBlocked: false },

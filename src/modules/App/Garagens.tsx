@@ -66,6 +66,7 @@ function Garagens({ user }: IGaragens) {
                 id: vagaAtual.id,
                 number: vagaAtual.number,
                 bloco_id: vagaAtual.bloco_id,
+
                 status: vagaAtual.status
             })
         } else {
@@ -128,7 +129,7 @@ function Garagens({ user }: IGaragens) {
                     <ModalDownUp ref={modalRef}
                         isSelect={!!vagaSelecionada}
                         statsVagasBloco = { statisticsBloco }
-                        blocoSelecionado={garagensDataLista.filtros.blocoSelecionado}
+                        blocoSelecionado={ garagensDataLista.filtros.blocoSelecionado }
                         vagaSelecionada={vagaSelecionada}
                         exibirVaga={mostrarFormulario}
                         setExibirVaga={setMostrarFormulario} />
